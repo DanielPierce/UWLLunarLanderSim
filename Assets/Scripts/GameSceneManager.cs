@@ -16,6 +16,7 @@ public class GameSceneManager : MonoBehaviour
 
     void Start()
     {
+        lander.body.useGravity = false;
         if(currentLocation == Scenario.Moon)
         {
             lander.thrust = 45040; // N
