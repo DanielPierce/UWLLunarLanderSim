@@ -171,7 +171,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!65 &30328881
 BoxCollider:
@@ -241,7 +241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30328878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.81, y: 0.73, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1594652235}
@@ -301,7 +301,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.7256927
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -418,7 +418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760858261}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.1255, y: -3.3844, z: -0.4664306}
+  m_LocalPosition: {x: -6.1255, y: -3.3844, z: -0.5}
   m_LocalScale: {x: 1.7643908, y: 0.59199893, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -673,7 +673,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621898203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.942, y: -3.7501, z: -0.4664306}
+  m_LocalPosition: {x: -0.942, y: -3.7501, z: -0.5}
   m_LocalScale: {x: 2.3673208, y: 0.57673466, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -766,7 +766,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896176099}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.0623, y: -3.225, z: -0.4664306}
+  m_LocalPosition: {x: 5.0623, y: -3.225, z: -0.5}
   m_LocalScale: {x: 1.6680163, y: 0.5828692, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
