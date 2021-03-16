@@ -11,6 +11,8 @@ public class GameSceneManager : MonoBehaviour
 
     public Scenario currentLocation = Scenario.Moon;
 
+    private PhysicsData landerData = null;
+
 
     private bool isPaused = false;
 
@@ -22,6 +24,7 @@ public class GameSceneManager : MonoBehaviour
             lander.thrust = 45040; // N
             lander.gravity = 1.62f; // m/s/s
             lander.body.drag = 0;
+            lander.body.angularDrag = 0;
             lander.body.mass = 15200; // kg
             lander.torque = 50;
             // Can add additional values here like fuel levels, dry mass, etc
@@ -31,6 +34,7 @@ public class GameSceneManager : MonoBehaviour
             lander.thrust = 45040; // N
             lander.gravity = 3.72f; // m/s/s
             lander.body.drag = 0;
+            lander.body.angularDrag = 0;
             lander.body.mass = 15200; // kg
             lander.torque = 50;
             // Will have to update these for martian conditions
@@ -41,6 +45,7 @@ public class GameSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        landerData = lander.GetPhysicsData();
         // If the space key was pressed this frame
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -56,5 +61,17 @@ public class GameSceneManager : MonoBehaviour
                 Time.timeScale = 1;
             }
         }
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(20, 20, 250, 20), "Net force:    " + landerData.netForce);
+        GUI.Label(new Rect(20, 40, 250, 20), "Net torque:   " + landerData.netTorque);
+        GUI.Label(new Rect(20, 60, 250, 20), "Angular vel:  " + landerData.angularVelocity);
+        GUI.Label(new Rect(20, 80, 250, 20), "Angular acc:  " + landerData.angularAcceleration);
+        GUI.Label(new Rect(20, 100, 250, 20), "Velocity:     " + landerData.velocity);
+        GUI.Label(new Rect(20, 120, 250, 20), "Acceleration: " + landerData.acceleration);
+        GUI.Label(new Rect(20, 140, 250, 20), "Altitude:     " + landerData.altitude);
+        GUI.Label(new Rect(20, 160, 250, 20), "Rotation:     " + landerData.degreesRotated);
     }
 }
