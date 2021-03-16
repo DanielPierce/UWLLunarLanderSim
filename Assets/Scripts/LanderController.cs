@@ -10,6 +10,7 @@ public class LanderController : MonoBehaviour
     public int thrust;
     public float gravity;
     public Vector3 thrustVector;
+    public float degreesRotated;
     
 
 
@@ -28,10 +29,11 @@ public class LanderController : MonoBehaviour
         // If the up arrow is down, apply an impulse this timestep
         if(Input.GetKey(KeyCode.UpArrow))
         {
-            // Thrust is newtons, multiply by time since last physics step to get newton-seconds
-            //body.AddForce(Vector3.up * thrust * Time.deltaTime, ForceMode.Impulse);
-            float degreesRotated = (body.transform.localRotation.z);
-            thrustVector = new Vector3(Mathf.Sin(degreesRotated), Mathf.Cos(degreesRotated), 0);
+            // Pull the rotation of the lander and store it is degreesRotated
+            degreesRotated = (body.transform.localRotation.z);
+            //Create a vector to represent thrust based on the lander's rotation
+            thrustVector = new Vector3(Mathf.Sin(degreesRotated) * -1, Mathf.Cos(degreesRotated), 0);
+            //Apply the thrust using the vector created
             body.AddForce(thrustVector * thrust * Time.deltaTime, ForceMode.Impulse);
 
             //body.transform.LocalRotation.z
