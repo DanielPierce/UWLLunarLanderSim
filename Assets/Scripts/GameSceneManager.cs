@@ -29,7 +29,7 @@ public class GameSceneManager : MonoBehaviour
         else if(currentLocation == Scenario.Mars)
         {
             lander.thrust = 45040; // N
-            lander.gravity = 1.62f; // m/s/s
+            lander.gravity = 3.72f; // m/s/s
             lander.body.drag = 0;
             lander.body.mass = 15200; // kg
             lander.torque = 50;
