@@ -9,7 +9,9 @@ public class LanderController : MonoBehaviour
     public Rigidbody body;
     public int thrust;
     public float gravity;
-    
+    public Vector3 thrustVector;
+    public float degreesRotated;
+    public float torque;
 
 
     // Start is called before the first frame update
@@ -23,12 +25,28 @@ public class LanderController : MonoBehaviour
     {
         // Add affects of gravity
         body.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
+        degreesRotated = -1 * (body.rotation.eulerAngles.z - 90);
+        thrustVector = new Vector2(Mathf.Cos(Mathf.Deg2Rad * degreesRotated) * -1, Mathf.Sin(Mathf.Deg2Rad * degreesRotated));
 
         // If the up arrow is down, apply an impulse this timestep
-        if(Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            // Thrust is newtons, multiply by time since last physics step to get newton-seconds
-            body.AddForce(Vector3.up * thrust * Time.deltaTime, ForceMode.Impulse);
+            // Pull the rotation of the lander and store it is degreesRotated
+            //Create a vector to represent thrust based on the lander's rotation
+            //Apply the thrust using the vector created
+            body.AddForce(thrustVector * thrust * Time.deltaTime, ForceMode.Impulse);
+
+            //body.transform.LocalRotation.z
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            // Rotate left in the Z plane here
+            body.AddTorque(Vector3.forward * torque, ForceMode.Impulse);
+        }
+        if(Input.GetKey(KeyCode.RightArrow))
+        {
+            // Rotate right in the Z plane here
+            body.AddTorque(Vector3.forward * torque * -1, ForceMode.Impulse);
         }
 
 
