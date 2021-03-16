@@ -1840,7 +1840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lander: {fileID: 30328879}
-  currentLocation: 1
+  currentLocation: 0
 --- !u!4 &2072599421
 Transform:
   m_ObjectHideFlags: 0
