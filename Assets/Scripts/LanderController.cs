@@ -11,7 +11,7 @@ public class LanderController : MonoBehaviour
     public float gravity;
     public Vector3 thrustVector;
     public float degreesRotated;
-    
+    public float torque;
 
 
     // Start is called before the first frame update
@@ -41,12 +41,12 @@ public class LanderController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             // Rotate left in the Z plane here
-            body.transform.Rotate(0, 0, 2);
+            body.AddTorque(Vector3.forward * torque, ForceMode.Impulse);
         }
         if(Input.GetKey(KeyCode.RightArrow))
         {
             // Rotate right in the Z plane here
-            body.transform.Rotate(0, 0, -2);
+            body.AddTorque(Vector3.forward * torque * -1, ForceMode.Impulse);
         }
 
 
