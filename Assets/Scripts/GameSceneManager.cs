@@ -11,6 +11,8 @@ public class GameSceneManager : MonoBehaviour
 
     public Scenario currentLocation = Scenario.Moon;
 
+    private PhysicsData landerData = null;
+
 
     private bool isPaused = false;
 
@@ -43,6 +45,7 @@ public class GameSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        landerData = lander.GetPhysicsData();
         // If the space key was pressed this frame
         if (Input.GetKeyDown(KeyCode.Space))
         {
