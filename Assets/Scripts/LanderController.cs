@@ -9,6 +9,7 @@ public class LanderController : MonoBehaviour
     public Rigidbody body;
     public int thrust;
     public float gravity;
+    public Vector3 thrustVector;
     
 
 
@@ -28,7 +29,22 @@ public class LanderController : MonoBehaviour
         if(Input.GetKey(KeyCode.UpArrow))
         {
             // Thrust is newtons, multiply by time since last physics step to get newton-seconds
-            body.AddForce(Vector3.up * thrust * Time.deltaTime, ForceMode.Impulse);
+            //body.AddForce(Vector3.up * thrust * Time.deltaTime, ForceMode.Impulse);
+            float degreesRotated = (body.transform.localRotation.z);
+            thrustVector = new Vector3(Mathf.Sin(degreesRotated), Mathf.Cos(degreesRotated), 0);
+            body.AddForce(thrustVector * thrust * Time.deltaTime, ForceMode.Impulse);
+
+            //body.transform.LocalRotation.z
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            // Rotate left in the Z plane here
+            body.transform.Rotate(0, 0, 2);
+        }
+        if(Input.GetKey(KeyCode.RightArrow))
+        {
+            // Rotate right in the Z plane here
+            body.transform.Rotate(0, 0, -2);
         }
 
 
