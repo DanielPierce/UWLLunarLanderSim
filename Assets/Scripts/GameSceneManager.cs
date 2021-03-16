@@ -62,4 +62,16 @@ public class GameSceneManager : MonoBehaviour
             }
         }
     }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(20, 20, 250, 20), "Net force:    " + landerData.netForce);
+        GUI.Label(new Rect(20, 40, 250, 20), "Net torque:   " + landerData.netTorque);
+        GUI.Label(new Rect(20, 60, 250, 20), "Angular vel:  " + landerData.angularVelocity);
+        GUI.Label(new Rect(20, 80, 250, 20), "Angular acc:  " + landerData.angularAcceleration);
+        GUI.Label(new Rect(20, 100, 250, 20), "Velocity:     " + landerData.velocity);
+        GUI.Label(new Rect(20, 120, 250, 20), "Acceleration: " + landerData.acceleration);
+        GUI.Label(new Rect(20, 140, 250, 20), "Altitude:     " + landerData.altitude);
+        GUI.Label(new Rect(20, 160, 250, 20), "Rotation:     " + landerData.degreesRotated);
+    }
 }
