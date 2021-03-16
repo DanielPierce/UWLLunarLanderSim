@@ -22,6 +22,7 @@ public class GameSceneManager : MonoBehaviour
             lander.thrust = 45040; // N
             lander.gravity = 1.62f; // m/s/s
             lander.body.drag = 0;
+            lander.body.angularDrag = 0;
             lander.body.mass = 15200; // kg
             lander.torque = 50;
             // Can add additional values here like fuel levels, dry mass, etc
@@ -31,6 +32,7 @@ public class GameSceneManager : MonoBehaviour
             lander.thrust = 45040; // N
             lander.gravity = 3.72f; // m/s/s
             lander.body.drag = 0;
+            lander.body.angularDrag = 0;
             lander.body.mass = 15200; // kg
             lander.torque = 50;
             // Will have to update these for martian conditions
