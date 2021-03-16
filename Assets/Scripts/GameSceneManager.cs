@@ -25,7 +25,10 @@ public class GameSceneManager : MonoBehaviour
             lander.gravity = 1.62f; // m/s/s
             lander.body.drag = 0;
             lander.body.angularDrag = 0;
-            lander.body.mass = 15200; // kg
+            lander.drymass = 6839; // kg
+            lander.maxFuelMass = 8165; // kg
+            lander.currentFuelMass = lander.maxFuelMass * 0.1f; // Start with 10% fuel remaining
+            lander.burnRate = 14.75f; // kg/s
             lander.torque = 50;
             // Can add additional values here like fuel levels, dry mass, etc
         }
@@ -73,5 +76,6 @@ public class GameSceneManager : MonoBehaviour
         GUI.Label(new Rect(20, 120, 250, 20), "Acceleration: " + landerData.acceleration);
         GUI.Label(new Rect(20, 140, 250, 20), "Altitude:     " + landerData.altitude);
         GUI.Label(new Rect(20, 160, 250, 20), "Rotation:     " + landerData.degreesRotated);
+        GUI.Label(new Rect(20, 200, 250, 20), "Current fuel: " + lander.currentFuelMass);
     }
 }

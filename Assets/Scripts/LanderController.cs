@@ -8,6 +8,13 @@ public class LanderController : MonoBehaviour
     public float gravity;
     public float torque;
 
+    public float maxFuelMass;
+    public float currentFuelMass;
+    public float burnRate;
+
+    public float throttle;
+
+    public float drymass;
 
     private Vector3 previousVelocity;
     private Vector3 previousAngularVelocity;
@@ -23,34 +30,19 @@ public class LanderController : MonoBehaviour
     // Fixed update is called every physics step
     void FixedUpdate()
     {
-        // Add affects of gravity
-        body.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
+        initializeTimestepVariables();
 
-        // Set initial values for variables to display
-        record.netForce = Vector3.down * gravity;
-        record.netTorque = 0;
-        // Velocity vector can be read from body.velocity
-        // Angular velocity can be read from body.angularVelocity.z (though this is radians/s)
-        // Altitude can be read from body.position.y - assumes that world's zero altitude is our defined zero altitude
-        record.velocity = body.velocity;
-        record.angularVelocity = body.angularVelocity.z * Mathf.Rad2Deg;
-        record.altitude = body.position.y;
-
-        
-        // Calculate the number of degrees from vertical the sprite has rotated
-        record.degreesRotated = -1 * (body.rotation.eulerAngles.z - 90);
         // Transform the rotation to a Vector2
         Vector2 rotationVector = new Vector2(Mathf.Cos(Mathf.Deg2Rad * record.degreesRotated) * -1, Mathf.Sin(Mathf.Deg2Rad * record.degreesRotated));
 
+        throttle = 0;
         // If the up arrow is down, apply an impulse this timestep
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            // Apply the thrust using the vector created
-            Vector2 thrustVector = rotationVector * thrust * Time.deltaTime;
-            body.AddForce(thrustVector, ForceMode.Impulse);
-
-            // Ensure the thrust from the thruster is applied to the net force
-            record.netForce += thrustVector;
+            if(currentFuelMass > 0)
+            {
+                throttle = 1;
+            }
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -65,16 +57,17 @@ public class LanderController : MonoBehaviour
             body.AddTorque(Vector3.forward * record.netTorque, ForceMode.Impulse);
         }
 
-        // Calculate instantaneous acceleration, and store current velocity for next frame
-        record.acceleration = (body.velocity - previousVelocity) / Time.deltaTime;
-        previousVelocity = body.velocity;
+        // Apply the thrust using the vector created
+        Vector2 thrustVector = rotationVector * thrust * Time.deltaTime * throttle;
+        body.AddForce(thrustVector, ForceMode.Impulse);
+        // Ensure the thrust from the thruster is applied to the net force
+        record.netForce += thrustVector;
 
-        // Same for instantaneous angular acceleration
-        Vector3 angularAccelVector = (body.angularVelocity * Mathf.Rad2Deg - previousAngularVelocity * Mathf.Rad2Deg) / Time.deltaTime;
-        record.angularAcceleration = angularAccelVector.z;
-        previousAngularVelocity = body.angularVelocity;
-        // Since angularVelocity is rads/s, angularAcceleration will be rads/s/s
+        currentFuelMass -= burnRate * throttle * Time.deltaTime;
+        currentFuelMass = Mathf.Max(currentFuelMass, 0);
+        body.mass = drymass + currentFuelMass;
 
+        recordPostPhysicsVariables();
     }
 
     // Update is called once per frame
@@ -101,6 +94,37 @@ public class LanderController : MonoBehaviour
     public PhysicsData GetPhysicsData()
     {
         return record;
+    }
+
+    private void initializeTimestepVariables()
+    {
+        // Add affects of gravity
+        body.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
+
+        // Set initial values for variables to display
+        record.netForce = Vector3.down * gravity;
+        record.netTorque = 0;
+        record.velocity = body.velocity;
+        record.angularVelocity = body.angularVelocity.z * Mathf.Rad2Deg;
+        record.altitude = body.position.y;
+
+
+        // Calculate the number of degrees from vertical the sprite has rotated
+        record.degreesRotated = -1 * (body.rotation.eulerAngles.z - 90);
+    }
+
+    private void recordPostPhysicsVariables()
+    {
+
+        // Calculate instantaneous acceleration, and store current velocity for next frame
+        record.acceleration = (body.velocity - previousVelocity) / Time.deltaTime;
+        previousVelocity = body.velocity;
+
+        // Same for instantaneous angular acceleration
+        Vector3 angularAccelVector = (body.angularVelocity * Mathf.Rad2Deg - previousAngularVelocity * Mathf.Rad2Deg) / Time.deltaTime;
+        record.angularAcceleration = angularAccelVector.z;
+        previousAngularVelocity = body.angularVelocity;
+
     }
 }
 
