@@ -25,14 +25,14 @@ public class LanderController : MonoBehaviour
     {
         // Add affects of gravity
         body.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
+        degreesRotated = -1 * (body.rotation.eulerAngles.z - 90);
+        thrustVector = new Vector2(Mathf.Cos(Mathf.Deg2Rad * degreesRotated) * -1, Mathf.Sin(Mathf.Deg2Rad * degreesRotated));
 
         // If the up arrow is down, apply an impulse this timestep
-        if(Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             // Pull the rotation of the lander and store it is degreesRotated
-            degreesRotated = (body.transform.localRotation.z);
             //Create a vector to represent thrust based on the lander's rotation
-            thrustVector = new Vector3(Mathf.Sin(degreesRotated) * -1, Mathf.Cos(degreesRotated), 0);
             //Apply the thrust using the vector created
             body.AddForce(thrustVector * thrust * Time.deltaTime, ForceMode.Impulse);
 
