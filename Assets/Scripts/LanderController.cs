@@ -21,6 +21,10 @@ public class LanderController : MonoBehaviour
 
     private PhysicsData record;
 
+    private float throttleMax = 1f;
+    private float throttleMin = 0f;
+    private float throttleInc = 0.001f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,9 +43,16 @@ public class LanderController : MonoBehaviour
         // If the up arrow is down, apply an impulse this timestep
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            if(currentFuelMass > 0)
+            if(throttle < throttleMax)
             {
-                throttle = 1;
+                throttle += throttleInc;
+            }
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        { 
+            if(throttle > throttleMin)
+            {
+                throttle -= throttleInc;
             }
         }
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -56,7 +67,11 @@ public class LanderController : MonoBehaviour
             record.netTorque = torque * -1;
             body.AddTorque(record.netTorque, ForceMode2D.Impulse);
         }
-
+        if(currentFuelMass <= 0)
+        {
+            throttle = 0;
+            currentFuelMass = 0;
+        }
         // Apply the thrust using the vector created
         Vector2 thrustVector = rotationVector * thrust * Time.deltaTime * throttle;
         body.AddForce(thrustVector, ForceMode2D.Impulse);
