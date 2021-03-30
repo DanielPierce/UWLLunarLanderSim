@@ -28,12 +28,15 @@ public class LanderController : MonoBehaviour
     private float throttleMin = 0f;
     private float throttleInc = 0.001f;
 
+    private bool thrusterEnabled = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
         record = new PhysicsData();
         originalPos = new Vector3(body.transform.position.x, body.transform.position.y, body.transform.position.z);
+        thrusterEnabled = true;
     }
 
     // Fixed update is called every physics step
@@ -45,19 +48,23 @@ public class LanderController : MonoBehaviour
         {
             throttle = 0;
             currentFuelMass = 0;
+            thrusterEnabled = false;
+        }
+        if (thrusterEnabled)
+        {
+            // Transform the rotation to a Vector2
+            Vector2 rotationVector = new Vector2(Mathf.Cos(Mathf.Deg2Rad * record.degreesRotated) * -1, Mathf.Sin(Mathf.Deg2Rad * record.degreesRotated));
+            // Apply the thrust using the vector created
+            Vector2 thrustVector = rotationVector * thrust * Time.deltaTime * throttle;
+            body.AddForce(thrustVector, ForceMode2D.Impulse);
+            // Ensure the thrust from the thruster is applied to the net force
+            record.netForce += thrustVector;
+
+            currentFuelMass -= burnRate * throttle * Time.deltaTime;
+            currentFuelMass = Mathf.Max(currentFuelMass, 0);
+            body.mass = drymass + currentFuelMass;
         }
 
-        // Transform the rotation to a Vector2
-        Vector2 rotationVector = new Vector2(Mathf.Cos(Mathf.Deg2Rad * record.degreesRotated) * -1, Mathf.Sin(Mathf.Deg2Rad * record.degreesRotated));
-        // Apply the thrust using the vector created
-        Vector2 thrustVector = rotationVector * thrust * Time.deltaTime * throttle;
-        body.AddForce(thrustVector, ForceMode2D.Impulse);
-        // Ensure the thrust from the thruster is applied to the net force
-        record.netForce += thrustVector;
-
-        currentFuelMass -= burnRate * throttle * Time.deltaTime;
-        currentFuelMass = Mathf.Max(currentFuelMass, 0);
-        body.mass = drymass + currentFuelMass;
 
         recordPostPhysicsVariables();
     }
@@ -181,6 +188,11 @@ public class LanderController : MonoBehaviour
         // Rotate clockwise in the Z plane here
         record.netTorque = torque * -1;
         body.AddTorque(record.netTorque, ForceMode2D.Impulse);
+    }
+
+    public void ToggleThruster()
+    {
+        thrusterEnabled = !thrusterEnabled;
     }
 }
 
