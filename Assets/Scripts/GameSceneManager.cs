@@ -52,7 +52,7 @@ public class GameSceneManager : MonoBehaviour
         landerData = lander.GetPhysicsData();
         HandleLanderThrottle();
         // If the space key was pressed this frame
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             // Pause or unpause
             isPaused = !isPaused;
@@ -65,6 +65,14 @@ public class GameSceneManager : MonoBehaviour
                 //Can probably put fudge factor here, set time to like 0.8f instead of 1
                 Time.timeScale = 1;
             }
+        }
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            lander.ToggleThruster();
+        }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            lander.ResetLander();
         }
     }
 
