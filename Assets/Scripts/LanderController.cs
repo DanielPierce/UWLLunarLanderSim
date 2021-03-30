@@ -8,6 +8,7 @@ public class LanderController : MonoBehaviour
     public float gravity;
     public float torque;
 
+    public float setFuelLevel;
     public float maxFuelMass;
     public float currentFuelMass;
     public float burnRate;
@@ -26,6 +27,7 @@ public class LanderController : MonoBehaviour
     private float throttleMax = 1f;
     private float throttleMin = 0f;
     private float throttleInc = 0.001f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -103,7 +105,7 @@ public class LanderController : MonoBehaviour
             body.rotation = 0;
             body.velocity = new Vector2(0, 0);
             body.angularVelocity = 0;
-            
+            currentFuelMass = setFuelLevel;
         }
     }
 
@@ -150,7 +152,7 @@ public class LanderController : MonoBehaviour
         {
             throttle += throttleInc;
         }
-        if (throttle < throttleMax)
+        if (throttle >= throttleMax)
         {
             throttle = throttleMax;
         }
@@ -161,7 +163,7 @@ public class LanderController : MonoBehaviour
         {
             throttle -= throttleInc;
         }
-        if (throttle < throttleMin)
+        if (throttle <= throttleMin)
         {
             throttle = throttleMin;
         }

@@ -27,7 +27,8 @@ public class GameSceneManager : MonoBehaviour
             lander.body.angularDrag = 0;
             lander.drymass = 6839; // kg
             lander.maxFuelMass = 8165; // kg
-            lander.currentFuelMass = lander.maxFuelMass * 0.01f; // Start with 10% fuel remaining
+            lander.setFuelLevel = lander.maxFuelMass * 0.1f; // Start with 10% fuel remaining
+            lander.currentFuelMass = lander.setFuelLevel;
             lander.burnRate = 14.75f; // kg/s
             lander.torque = 50;
             // Can add additional values here like fuel levels, dry mass, etc
