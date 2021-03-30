@@ -85,30 +85,38 @@ public class LanderController : MonoBehaviour
         // the good/bad landing zone objects
         if (targetObj.gameObject.tag == "FlatTerrain")
         {
+            float velocity = targetObj.relativeVelocity.magnitude;
             // Check if velocity/orientation are good
-            if (body.velocity.y < 3.0)
+            if (velocity <= 1.5)
             {
                 //soft landing
-                Debug.Log("Soft Landing detected");
+                Debug.Log("Soft landing @ speed: " + velocity);
             }
-            else if (body.velocity.y < 6.0)
+            else if (velocity < 3.0)
             {
                 //Hard Landing
-                Debug.Log("Hard Landing detected");
+                Debug.Log("Hard landing @ speed: " + velocity);
             }
             else
             {
                 // Crashed, reset position
-                body.transform.position = originalPos;
-                Debug.Log("Crash detected");
+                Debug.Log("Crash landing @ speed: " + velocity);
+                body.position = originalPos;
+                body.rotation = 0;
+                body.velocity = new Vector2(0, 0);
+                body.angularVelocity = 0;
             }
 
         }
+
         if (targetObj.gameObject.tag == "CrashTerrain")
         {
             // Crashed, reset position
-            body.transform.position = originalPos;
-            Debug.Log("Crash detected");
+            body.position = originalPos;
+            body.rotation = 0;
+            body.velocity = new Vector2(0, 0);
+            body.angularVelocity = 0;
+            
         }
     }
 
