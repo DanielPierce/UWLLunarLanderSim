@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static GameSceneManager;
 
 public class LanderController : MonoBehaviour
 {
@@ -30,8 +31,16 @@ public class LanderController : MonoBehaviour
 
     private bool thrusterEnabled = true;
 
-    private const float safeLandingMaxSpeed = 3.0f;
-    private const float hardLandingMaxSpeed = 6.0f;
+    private const float safeLandingMaxSpeed = 30.0f;
+    private const float hardLandingMaxSpeed = 60.0f;
+
+    private float internalRotation;
+
+    public SimulationMode simMode;
+
+    private const float arcadeModeRotationSpeed = 50f;
+
+    public SpriteRenderer sprite;
 
 
     // Start is called before the first frame update
@@ -56,10 +65,12 @@ public class LanderController : MonoBehaviour
         if (thrusterEnabled)
         {
             // Transform the rotation to a Vector2
-            Vector2 rotationVector = new Vector2(Mathf.Cos(Mathf.Deg2Rad * record.degreesRotated) * -1, Mathf.Sin(Mathf.Deg2Rad * record.degreesRotated));
+            Vector2 rotationVector = new Vector2(Mathf.Cos(Mathf.Deg2Rad * internalRotation) * -1, Mathf.Sin(Mathf.Deg2Rad * internalRotation));
+
             // Apply the thrust using the vector created
             Vector2 thrustVector = rotationVector * thrust * Time.deltaTime * throttle;
             body.AddForce(thrustVector, ForceMode2D.Impulse);
+
             // Ensure the thrust from the thruster is applied to the net force
             record.netForce += thrustVector;
 
@@ -131,6 +142,12 @@ public class LanderController : MonoBehaviour
 
         // Calculate the number of degrees from vertical the sprite has rotated
         record.degreesRotated = -1 * (body.rotation - 90);
+
+        internalRotation = Mathf.Round( (-1 * (body.rotation - 90)) / 5 ) * 5;
+        record.internalRotation = internalRotation;
+
+        sprite.transform.rotation = Quaternion.AngleAxis(Mathf.Round(body.rotation / 5) * 5, Vector3.forward);
+        sprite.transform.position = this.transform.position;
     }
 
     private void recordPostPhysicsVariables()
@@ -173,15 +190,29 @@ public class LanderController : MonoBehaviour
     public void RotateLeft()
     {
         // Rotate counterclockwise in the Z plane here
-        record.netTorque = torque;
-        body.AddTorque(record.netTorque, ForceMode2D.Impulse);
+        if (simMode == SimulationMode.FullPhys)
+        {
+            record.netTorque = torque;
+            body.AddTorque(record.netTorque, ForceMode2D.Impulse);
+        }
+        else // arcade mode
+        {
+            body.rotation += arcadeModeRotationSpeed * Time.deltaTime;
+        }
     }
 
     public void RotateRight()
     {
         // Rotate clockwise in the Z plane here
-        record.netTorque = torque * -1;
-        body.AddTorque(record.netTorque, ForceMode2D.Impulse);
+        if (simMode == SimulationMode.FullPhys)
+        {
+            record.netTorque = torque * -1;
+            body.AddTorque(record.netTorque, ForceMode2D.Impulse);
+        }
+        else // arcade mode
+        {
+            body.rotation -= arcadeModeRotationSpeed * Time.deltaTime;
+        }
     }
 
     public void ToggleThruster()
@@ -214,4 +245,6 @@ public class PhysicsData
     public float angularAcceleration;
 
     public float altitude;
+
+    public float internalRotation;
 }
