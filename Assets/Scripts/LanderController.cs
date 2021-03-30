@@ -30,6 +30,9 @@ public class LanderController : MonoBehaviour
 
     private bool thrusterEnabled = true;
 
+    private const float safeLandingMaxSpeed = 3.0f;
+    private const float hardLandingMaxSpeed = 6.0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -83,12 +86,12 @@ public class LanderController : MonoBehaviour
         {
             float velocity = targetObj.relativeVelocity.magnitude;
             // Check if velocity/orientation are good
-            if (velocity <= 1.5)
+            if (velocity <= safeLandingMaxSpeed)
             {
                 //soft landing
                 Debug.Log("Soft landing @ speed: " + velocity);
             }
-            else if (velocity < 3.0)
+            else if (velocity < hardLandingMaxSpeed)
             {
                 //Hard Landing
                 Debug.Log("Hard landing @ speed: " + velocity);
@@ -123,7 +126,7 @@ public class LanderController : MonoBehaviour
         record.netTorque = 0;
         record.velocity = body.velocity;
         record.angularVelocity = body.angularVelocity * Mathf.Rad2Deg;
-        record.altitude = body.position.y;
+        record.altitude = body.position.y - (body.transform.localScale.y / 2);
 
 
         // Calculate the number of degrees from vertical the sprite has rotated
