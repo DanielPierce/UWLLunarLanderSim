@@ -8,6 +8,7 @@ public class LanderController : MonoBehaviour
     public float gravity;
     public float torque;
 
+    public float setFuelLevel;
     public float maxFuelMass;
     public float currentFuelMass;
     public float burnRate;
@@ -23,6 +24,11 @@ public class LanderController : MonoBehaviour
 
     private PhysicsData record;
 
+    private float throttleMax = 1f;
+    private float throttleMin = 0f;
+    private float throttleInc = 0.001f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,31 +41,14 @@ public class LanderController : MonoBehaviour
     {
         initializeTimestepVariables();
 
+        if (currentFuelMass <= 0)
+        {
+            throttle = 0;
+            currentFuelMass = 0;
+        }
+
         // Transform the rotation to a Vector2
         Vector2 rotationVector = new Vector2(Mathf.Cos(Mathf.Deg2Rad * record.degreesRotated) * -1, Mathf.Sin(Mathf.Deg2Rad * record.degreesRotated));
-
-        throttle = 0;
-        // If the up arrow is down, apply an impulse this timestep
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            if(currentFuelMass > 0)
-            {
-                throttle = 1;
-            }
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            // Rotate counterclockwise in the Z plane here
-            record.netTorque = torque;
-            body.AddTorque(record.netTorque, ForceMode2D.Impulse);
-        }
-        if(Input.GetKey(KeyCode.RightArrow))
-        {
-            // Rotate clockwise in the Z plane here
-            record.netTorque = torque * -1;
-            body.AddTorque(record.netTorque, ForceMode2D.Impulse);
-        }
-
         // Apply the thrust using the vector created
         Vector2 thrustVector = rotationVector * thrust * Time.deltaTime * throttle;
         body.AddForce(thrustVector, ForceMode2D.Impulse);
@@ -116,7 +105,7 @@ public class LanderController : MonoBehaviour
             body.rotation = 0;
             body.velocity = new Vector2(0, 0);
             body.angularVelocity = 0;
-            
+            currentFuelMass = setFuelLevel;
         }
     }
 
@@ -155,6 +144,43 @@ public class LanderController : MonoBehaviour
         record.angularAcceleration = angularAccelVector;
         previousAngularVelocity = body.angularVelocity;
 
+    }
+
+    public void IncreaseThrottle()
+    {
+        if (throttle < throttleMax)
+        {
+            throttle += throttleInc;
+        }
+        if (throttle >= throttleMax)
+        {
+            throttle = throttleMax;
+        }
+    }
+    public void DecreaseThrottle()
+    {
+        if (throttle > throttleMin)
+        {
+            throttle -= throttleInc;
+        }
+        if (throttle <= throttleMin)
+        {
+            throttle = throttleMin;
+        }
+    }
+
+    public void RotateLeft()
+    {
+        // Rotate counterclockwise in the Z plane here
+        record.netTorque = torque;
+        body.AddTorque(record.netTorque, ForceMode2D.Impulse);
+    }
+
+    public void RotateRight()
+    {
+        // Rotate clockwise in the Z plane here
+        record.netTorque = torque * -1;
+        body.AddTorque(record.netTorque, ForceMode2D.Impulse);
     }
 }
 

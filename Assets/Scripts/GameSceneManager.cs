@@ -27,7 +27,8 @@ public class GameSceneManager : MonoBehaviour
             lander.body.angularDrag = 0;
             lander.drymass = 6839; // kg
             lander.maxFuelMass = 8165; // kg
-            lander.currentFuelMass = lander.maxFuelMass * 0.01f; // Start with 10% fuel remaining
+            lander.setFuelLevel = lander.maxFuelMass * 0.1f; // Start with 10% fuel remaining
+            lander.currentFuelMass = lander.setFuelLevel;
             lander.burnRate = 14.75f; // kg/s
             lander.torque = 50;
             // Can add additional values here like fuel levels, dry mass, etc
@@ -49,6 +50,7 @@ public class GameSceneManager : MonoBehaviour
     void Update()
     {
         landerData = lander.GetPhysicsData();
+        HandleLanderThrottle();
         // If the space key was pressed this frame
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -77,5 +79,35 @@ public class GameSceneManager : MonoBehaviour
         GUI.Label(new Rect(20, 140, 250, 20), "Altitude:     " + landerData.altitude);
         GUI.Label(new Rect(20, 160, 250, 20), "Rotation:     " + landerData.degreesRotated);
         GUI.Label(new Rect(20, 200, 250, 20), "Current fuel: " + lander.currentFuelMass);
+        GUI.Label(new Rect(20, 240, 250, 20), "Throttle:     " + lander.throttle);
+    }
+
+    void FixedUpdate()
+    {
+        HandleLanderRotation();
+    }
+
+    void HandleLanderThrottle()
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            lander.IncreaseThrottle();
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            lander.DecreaseThrottle();
+        }
+    }
+
+    void HandleLanderRotation()
+    {
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            lander.RotateLeft();
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            lander.RotateRight();
+        }
     }
 }
