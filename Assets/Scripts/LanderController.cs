@@ -79,11 +79,10 @@ public class LanderController : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision targetObj)
+    void OnCollisionEnter2D(Collision2D targetObj)
     {
         // If we handle collisions like this, make sure to correctly assign tags to
         // the good/bad landing zone objects
-        Debug.Log("Collision Detected");
         if (targetObj.gameObject.tag == "FlatTerrain")
         {
             // Check if velocity/orientation are good
