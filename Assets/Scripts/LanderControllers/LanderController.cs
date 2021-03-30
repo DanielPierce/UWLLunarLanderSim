@@ -69,7 +69,8 @@ public class LanderController : MonoBehaviour
             body.AddForce(thrustVector, ForceMode2D.Impulse);
 
             // Ensure the thrust from the thruster is applied to the net force
-            record.netForce += rotationVector * thrust * throttle;
+            record.thrustForce = rotationVector * thrust * throttle;
+            record.netForce += record.thrustForce;
 
             currentFuelMass -= burnRate * throttle * Time.deltaTime;
             currentFuelMass = Mathf.Max(currentFuelMass, 0);
@@ -83,7 +84,11 @@ public class LanderController : MonoBehaviour
 
     public virtual void OnPhysicsUpdate()
     {
+        internalRotation = record.degreesRotated;
+        record.internalRotation = internalRotation;
 
+        sprite.transform.rotation = transform.rotation;
+        sprite.transform.position = transform.position;
     }
 
     void OnCollisionEnter2D(Collision2D targetObj)
@@ -139,12 +144,6 @@ public class LanderController : MonoBehaviour
 
         // Calculate the number of degrees from vertical the sprite has rotated
         record.degreesRotated = -1 * (body.rotation - 90);
-
-        internalRotation = record.degreesRotated;
-        record.internalRotation = internalRotation;
-
-        sprite.transform.rotation = transform.rotation;
-        sprite.transform.position = transform.position;
     }
 
     protected void recordPostPhysicsVariables()
@@ -223,6 +222,7 @@ public class PhysicsData
     public float angularVelocity;
 
     public Vector2 netForce;
+    public Vector2 thrustForce;
     public float netTorque;
     public Vector2 acceleration;
     public float angularAcceleration;

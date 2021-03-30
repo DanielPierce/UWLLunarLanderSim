@@ -88,8 +88,9 @@ public class GameSceneManager : MonoBehaviour
         GUI.Label(new Rect(20, 140, 250, 20), "Altitude:     " + landerData.altitude);
         GUI.Label(new Rect(20, 160, 250, 20), "Rotation:     " + landerData.degreesRotated);
         GUI.Label(new Rect(20, 180, 250, 20), "Internal Rot: " + landerData.internalRotation);
-        GUI.Label(new Rect(20, 200, 250, 20), "Current fuel: " + lander.currentFuelMass);
-        GUI.Label(new Rect(20, 240, 250, 20), "Throttle:     " + lander.throttle);
+        GUI.Label(new Rect(20, 200, 250, 20), "Thrust force: " + landerData.thrustForce);
+        GUI.Label(new Rect(20, 240, 250, 20), "Current fuel: " + lander.currentFuelMass);
+        GUI.Label(new Rect(20, 260, 250, 20), "Throttle:     " + lander.throttle);
     }
 
     void FixedUpdate()
