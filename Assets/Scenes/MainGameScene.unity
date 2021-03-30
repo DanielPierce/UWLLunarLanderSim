@@ -407,6 +407,7 @@ MonoBehaviour:
   burnRate: 0
   throttle: 0
   drymass: 0
+  originalPos: {x: 0, y: 0, z: 0}
 --- !u!1 &895688123
 GameObject:
   m_ObjectHideFlags: 0

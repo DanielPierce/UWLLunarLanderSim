@@ -16,6 +16,8 @@ public class LanderController : MonoBehaviour
 
     public float drymass;
 
+    public Vector3 originalPos;
+
     private Vector2 previousVelocity;
     private float previousAngularVelocity;
 
@@ -25,6 +27,7 @@ public class LanderController : MonoBehaviour
     void Start()
     {
         record = new PhysicsData();
+        originalPos = new Vector3(body.transform.position.x, body.transform.position.y, body.transform.position.z);
     }
 
     // Fixed update is called every physics step
@@ -80,17 +83,33 @@ public class LanderController : MonoBehaviour
     {
         // If we handle collisions like this, make sure to correctly assign tags to
         // the good/bad landing zone objects
-
+        Debug.Log("Collision Detected");
         if (targetObj.gameObject.tag == "FlatTerrain")
         {
             // Check if velocity/orientation are good
-            
-            
+            if (body.velocity.y < 3.0)
+            {
+                //soft landing
+                Debug.Log("Soft Landing detected");
+            }
+            else if (body.velocity.y < 6.0)
+            {
+                //Hard Landing
+                Debug.Log("Hard Landing detected");
+            }
+            else
+            {
+                // Crashed, reset position
+                body.transform.position = originalPos;
+                Debug.Log("Crash detected");
+            }
+
         }
         if (targetObj.gameObject.tag == "CrashTerrain")
         {
             // Crashed, reset position
-            body.Transform.position == (1.173, 1.658, -0.01);
+            body.transform.position = originalPos;
+            Debug.Log("Crash detected");
         }
     }
 
