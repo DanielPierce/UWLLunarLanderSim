@@ -81,13 +81,16 @@ public class LanderController : MonoBehaviour
         // If we handle collisions like this, make sure to correctly assign tags to
         // the good/bad landing zone objects
 
-        if (targetObj.gameObject.tag == "Goal")
+        if (targetObj.gameObject.tag == "FlatTerrain")
         {
             // Check if velocity/orientation are good
+            
+            
         }
-        if (targetObj.gameObject.tag == "Hazard")
+        if (targetObj.gameObject.tag == "CrashTerrain")
         {
-            // Crashed
+            // Crashed, reset position
+            body.Transform.position == (1.173, 1.658, -0.01);
         }
     }
 
