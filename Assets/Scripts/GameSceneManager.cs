@@ -70,6 +70,10 @@ public class GameSceneManager : MonoBehaviour
         {
             lander.ToggleThruster();
         }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            lander.ResetLander();
+        }
     }
 
     void OnGUI()

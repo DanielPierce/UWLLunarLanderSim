@@ -17,7 +17,7 @@ public class LanderController : MonoBehaviour
 
     public float drymass;
 
-    public Vector3 originalPos;
+    public Vector2 originalPos;
 
     private Vector2 previousVelocity;
     private float previousAngularVelocity;
@@ -35,7 +35,7 @@ public class LanderController : MonoBehaviour
     void Start()
     {
         record = new PhysicsData();
-        originalPos = new Vector3(body.transform.position.x, body.transform.position.y, body.transform.position.z);
+        originalPos = new Vector2(body.position.x, body.position.y);
         thrusterEnabled = true;
     }
 
@@ -96,23 +96,14 @@ public class LanderController : MonoBehaviour
             else
             {
                 // Crashed, reset position
-                Debug.Log("Crash landing @ speed: " + velocity);
-                body.position = originalPos;
-                body.rotation = 0;
-                body.velocity = new Vector2(0, 0);
-                body.angularVelocity = 0;
+                ResetLander();
             }
 
         }
 
         if (targetObj.gameObject.tag == "CrashTerrain")
         {
-            // Crashed, reset position
-            body.position = originalPos;
-            body.rotation = 0;
-            body.velocity = new Vector2(0, 0);
-            body.angularVelocity = 0;
-            currentFuelMass = setFuelLevel;
+            ResetLander();
         }
     }
 
@@ -193,6 +184,16 @@ public class LanderController : MonoBehaviour
     public void ToggleThruster()
     {
         thrusterEnabled = !thrusterEnabled;
+    }
+
+    public void ResetLander()
+    {
+        // Crashed, reset position
+        body.position = originalPos;
+        body.rotation = 0;
+        body.velocity = Vector2.zero;
+        body.angularVelocity = 0;
+        currentFuelMass = setFuelLevel;
     }
 }
 
