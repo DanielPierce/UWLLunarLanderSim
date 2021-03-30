@@ -123,7 +123,7 @@ public class LanderController : MonoBehaviour
         record.netTorque = 0;
         record.velocity = body.velocity;
         record.angularVelocity = body.angularVelocity * Mathf.Rad2Deg;
-        record.altitude = body.position.y;
+        record.altitude = body.position.y - (body.transform.localScale.y / 2);
 
 
         // Calculate the number of degrees from vertical the sprite has rotated
