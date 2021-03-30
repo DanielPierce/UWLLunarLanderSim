@@ -32,7 +32,7 @@ public class GameSceneManager : MonoBehaviour
             lander.setFuelLevel = lander.maxFuelMass * 0.1f; // Start with 10% fuel remaining
             lander.currentFuelMass = lander.setFuelLevel;
             lander.burnRate = 14.75f; // kg/s
-            lander.torque = 50;
+            lander.torque = 150;
             // Can add additional values here like fuel levels, dry mass, etc
         }
         else if(currentLocation == Scenario.Mars)
