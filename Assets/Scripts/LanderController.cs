@@ -16,6 +16,8 @@ public class LanderController : MonoBehaviour
 
     public float drymass;
 
+    public Vector3 originalPos;
+
     private Vector2 previousVelocity;
     private float previousAngularVelocity;
 
@@ -29,6 +31,7 @@ public class LanderController : MonoBehaviour
     void Start()
     {
         record = new PhysicsData();
+        originalPos = new Vector3(body.transform.position.x, body.transform.position.y, body.transform.position.z);
     }
 
     // Fixed update is called every physics step
@@ -63,18 +66,44 @@ public class LanderController : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision targetObj)
+    void OnCollisionEnter2D(Collision2D targetObj)
     {
         // If we handle collisions like this, make sure to correctly assign tags to
         // the good/bad landing zone objects
-
-        if (targetObj.gameObject.tag == "Goal")
+        if (targetObj.gameObject.tag == "FlatTerrain")
         {
+            float velocity = targetObj.relativeVelocity.magnitude;
             // Check if velocity/orientation are good
+            if (velocity <= 1.5)
+            {
+                //soft landing
+                Debug.Log("Soft landing @ speed: " + velocity);
+            }
+            else if (velocity < 3.0)
+            {
+                //Hard Landing
+                Debug.Log("Hard landing @ speed: " + velocity);
+            }
+            else
+            {
+                // Crashed, reset position
+                Debug.Log("Crash landing @ speed: " + velocity);
+                body.position = originalPos;
+                body.rotation = 0;
+                body.velocity = new Vector2(0, 0);
+                body.angularVelocity = 0;
+            }
+
         }
-        if (targetObj.gameObject.tag == "Hazard")
+
+        if (targetObj.gameObject.tag == "CrashTerrain")
         {
-            // Crashed
+            // Crashed, reset position
+            body.position = originalPos;
+            body.rotation = 0;
+            body.velocity = new Vector2(0, 0);
+            body.angularVelocity = 0;
+            
         }
     }
 
