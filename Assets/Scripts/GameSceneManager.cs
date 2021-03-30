@@ -41,7 +41,6 @@ public class GameSceneManager : MonoBehaviour
             // Will have to update these for martian conditions
         }
         //others scenarios?
-        lander.simMode = simMode;
         if(simMode == SimulationMode.Arcade)
         {
             lander.body.angularDrag = 100;

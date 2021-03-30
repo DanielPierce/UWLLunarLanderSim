@@ -20,25 +20,21 @@ public class LanderController : MonoBehaviour
 
     public Vector2 originalPos;
 
-    private Vector2 previousVelocity;
-    private float previousAngularVelocity;
+    protected Vector2 previousVelocity;
+    protected float previousAngularVelocity;
 
-    private PhysicsData record;
+    protected PhysicsData record;
 
-    private float throttleMax = 1f;
-    private float throttleMin = 0f;
-    private float throttleInc = 0.001f;
+    protected float throttleMax = 1f;
+    protected float throttleMin = 0f;
+    protected float throttleInc = 0.001f;
 
-    private bool thrusterEnabled = true;
+    protected bool thrusterEnabled = true;
 
-    private const float safeLandingMaxSpeed = 30.0f;
-    private const float hardLandingMaxSpeed = 60.0f;
+    protected const float safeLandingMaxSpeed = 30.0f;
+    protected const float hardLandingMaxSpeed = 60.0f;
 
-    private float internalRotation;
-
-    public SimulationMode simMode;
-
-    private const float arcadeModeRotationSpeed = 50f;
+    protected float internalRotation;
 
     public SpriteRenderer sprite;
 
@@ -52,7 +48,7 @@ public class LanderController : MonoBehaviour
     }
 
     // Fixed update is called every physics step
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         initializeTimestepVariables();
 
@@ -62,6 +58,7 @@ public class LanderController : MonoBehaviour
             currentFuelMass = 0;
             thrusterEnabled = false;
         }
+
         if (thrusterEnabled)
         {
             // Transform the rotation to a Vector2
@@ -79,12 +76,12 @@ public class LanderController : MonoBehaviour
             body.mass = drymass + currentFuelMass;
         }
 
-
         recordPostPhysicsVariables();
+
+        OnPhysicsUpdate();
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void OnPhysicsUpdate()
     {
 
     }
@@ -126,14 +123,14 @@ public class LanderController : MonoBehaviour
         return record;
     }
 
-    private void initializeTimestepVariables()
+    protected virtual void initializeTimestepVariables()
     {
         // Add affects of gravity
         Vector2 gravForce = Vector2.down * gravity * body.mass;
         body.AddForce(gravForce * Time.deltaTime, ForceMode2D.Impulse);
 
         // Set initial values for variables to display
-        record.netForce = Vector3.down * gravity;
+        record.netForce = gravForce;
         record.netTorque = 0;
         record.velocity = body.velocity;
         record.angularVelocity = body.angularVelocity * Mathf.Rad2Deg;
@@ -143,14 +140,14 @@ public class LanderController : MonoBehaviour
         // Calculate the number of degrees from vertical the sprite has rotated
         record.degreesRotated = -1 * (body.rotation - 90);
 
-        internalRotation = Mathf.Round( (-1 * (body.rotation - 90)) / 5 ) * 5;
+        internalRotation = record.degreesRotated;
         record.internalRotation = internalRotation;
 
-        sprite.transform.rotation = Quaternion.AngleAxis(Mathf.Round(body.rotation / 5) * 5, Vector3.forward);
-        sprite.transform.position = this.transform.position;
+        sprite.transform.rotation = transform.rotation;
+        sprite.transform.position = transform.position;
     }
 
-    private void recordPostPhysicsVariables()
+    protected void recordPostPhysicsVariables()
     {
 
         // Calculate instantaneous acceleration, and store current velocity for next frame
@@ -187,32 +184,18 @@ public class LanderController : MonoBehaviour
         }
     }
 
-    public void RotateLeft()
+    public virtual void RotateLeft()
     {
         // Rotate counterclockwise in the Z plane here
-        if (simMode == SimulationMode.FullPhys)
-        {
-            record.netTorque = torque;
-            body.AddTorque(record.netTorque, ForceMode2D.Impulse);
-        }
-        else // arcade mode
-        {
-            body.rotation += arcadeModeRotationSpeed * Time.deltaTime;
-        }
+        record.netTorque = torque;
+        body.AddTorque(record.netTorque, ForceMode2D.Impulse);
     }
 
-    public void RotateRight()
+    public virtual void RotateRight()
     {
         // Rotate clockwise in the Z plane here
-        if (simMode == SimulationMode.FullPhys)
-        {
-            record.netTorque = torque * -1;
-            body.AddTorque(record.netTorque, ForceMode2D.Impulse);
-        }
-        else // arcade mode
-        {
-            body.rotation -= arcadeModeRotationSpeed * Time.deltaTime;
-        }
+        record.netTorque = torque * -1;
+        body.AddTorque(record.netTorque, ForceMode2D.Impulse);
     }
 
     public void ToggleThruster()
