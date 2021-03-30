@@ -69,7 +69,7 @@ public class LanderController : MonoBehaviour
             body.AddForce(thrustVector, ForceMode2D.Impulse);
 
             // Ensure the thrust from the thruster is applied to the net force
-            record.netForce += thrustVector;
+            record.netForce += rotationVector * thrust * throttle;
 
             currentFuelMass -= burnRate * throttle * Time.deltaTime;
             currentFuelMass = Mathf.Max(currentFuelMass, 0);
