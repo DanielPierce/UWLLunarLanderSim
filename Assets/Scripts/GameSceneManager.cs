@@ -8,8 +8,10 @@ public class GameSceneManager : MonoBehaviour
 
     public LanderController lander;
     public enum Scenario { Moon, Mars };
+    public enum SimulationMode { Arcade, FullPhys}
 
     public Scenario currentLocation = Scenario.Moon;
+    public SimulationMode simMode = SimulationMode.Arcade;
 
     private PhysicsData landerData = null;
 
@@ -30,20 +32,19 @@ public class GameSceneManager : MonoBehaviour
             lander.setFuelLevel = lander.maxFuelMass * 0.1f; // Start with 10% fuel remaining
             lander.currentFuelMass = lander.setFuelLevel;
             lander.burnRate = 14.75f; // kg/s
-            lander.torque = 50;
+            lander.torque = 150;
             // Can add additional values here like fuel levels, dry mass, etc
         }
         else if(currentLocation == Scenario.Mars)
         {
-            lander.thrust = 45040; // N
             lander.gravity = 3.72f; // m/s/s
-            lander.body.drag = 0;
-            lander.body.angularDrag = 0;
-            lander.body.mass = 15200; // kg
-            lander.torque = 50;
             // Will have to update these for martian conditions
         }
         //others scenarios?
+        if(simMode == SimulationMode.Arcade)
+        {
+            lander.body.angularDrag = 100;
+        }
     }
 
     // Update is called once per frame
@@ -86,8 +87,10 @@ public class GameSceneManager : MonoBehaviour
         GUI.Label(new Rect(20, 120, 250, 20), "Acceleration: " + landerData.acceleration);
         GUI.Label(new Rect(20, 140, 250, 20), "Altitude:     " + landerData.altitude);
         GUI.Label(new Rect(20, 160, 250, 20), "Rotation:     " + landerData.degreesRotated);
-        GUI.Label(new Rect(20, 200, 250, 20), "Current fuel: " + lander.currentFuelMass);
-        GUI.Label(new Rect(20, 240, 250, 20), "Throttle:     " + lander.throttle);
+        GUI.Label(new Rect(20, 180, 250, 20), "Internal Rot: " + landerData.internalRotation);
+        GUI.Label(new Rect(20, 200, 250, 20), "Thrust force: " + landerData.thrustForce);
+        GUI.Label(new Rect(20, 240, 250, 20), "Current fuel: " + lander.currentFuelMass);
+        GUI.Label(new Rect(20, 260, 250, 20), "Throttle:     " + lander.throttle);
     }
 
     void FixedUpdate()
