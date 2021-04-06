@@ -345,6 +345,8 @@ MonoBehaviour:
   drymass: 0
   originalPos: {x: 0, y: 0}
   sprite: {fileID: 1029418298}
+  animator: {fileID: 0}
+  crashLanding: {fileID: 0}
 --- !u!4 &733349038
 Transform:
   m_ObjectHideFlags: 0
@@ -353,7 +355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733349034}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 53.519592, y: -16.446424, z: 151.2322}
+  m_LocalPosition: {x: 53.519592, y: -16.446424, z: 0}
   m_LocalScale: {x: 9.4, y: 7.04, z: 1}
   m_Children: []
   m_Father: {fileID: 1818723524}
@@ -646,7 +648,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029418296}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 53.519592, y: -16.446424, z: 151.2322}
+  m_LocalPosition: {x: 53.519592, y: -16.446424, z: 0}
   m_LocalScale: {x: 9.4, y: 7.04, z: 1}
   m_Children: []
   m_Father: {fileID: 1818723524}
@@ -699,7 +701,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1080587877
@@ -990,7 +992,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818723523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.48041, y: 26.046425, z: -151.24219}
+  m_LocalPosition: {x: 17.48041, y: 26.046425, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 733349038}
@@ -1121,6 +1123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lander: {fileID: 733349037}
+  crashLanding: {fileID: 0}
   currentLocation: 0
   simMode: 1
 --- !u!4 &2072599421

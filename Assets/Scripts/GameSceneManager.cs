@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameSceneManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
     public LanderController lander;
+
+    public Image crashLanding;
     public enum Scenario { Moon, Mars };
     public enum SimulationMode { Arcade, FullPhys}
 
@@ -65,6 +68,8 @@ public class GameSceneManager : MonoBehaviour
             {
                 //Can probably put fudge factor here, set time to like 0.8f instead of 1
                 Time.timeScale = 1;
+
+                crashLanding.enabled = false;
             }
         }
         if(Input.GetKeyDown(KeyCode.Space))
@@ -74,6 +79,7 @@ public class GameSceneManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         {
             lander.ResetLander();
+            crashLanding.enabled = false;
         }
     }
 
