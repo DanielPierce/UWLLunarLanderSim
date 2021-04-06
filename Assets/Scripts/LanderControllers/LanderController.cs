@@ -105,34 +105,15 @@ public class LanderController : MonoBehaviour
             {
                 //soft landing
                 Debug.Log("Soft landing @ speed: " + velocity);
-<<<<<<< Updated upstream
-=======
 
                 //Add UI popup for soft landing here
 
                 //Toggle off thrusters
-                animator.SetBool("isThrusting", false); 
->>>>>>> Stashed changes
             }
             else if (velocity < hardLandingMaxSpeed)
             {
                 //Hard Landing
                 Debug.Log("Hard landing @ speed: " + velocity);
-<<<<<<< Updated upstream
-            }
-            else
-            {
-                // Crashed, reset position
-                ResetLander();
-=======
-
-                //Add UI popup for hard landing here
-
-                //Add any damages here(20% fuel loss for now)
-                currentFuelMass = currentFuelMass * 0.8f;
-
-                //Toggle off thrusters
-                animator.SetBool("isThrusting", false); 
             }
             else
             {
@@ -145,23 +126,19 @@ public class LanderController : MonoBehaviour
                 throttle = 0;
                 currentFuelMass = 0;
                 thrusterEnabled = false;
-                animator.SetBool("isThrusting", false); 
->>>>>>> Stashed changes
             }
 
         }
 
         if (targetObj.gameObject.tag == "CrashTerrain")
         {
-<<<<<<< Updated upstream
             ResetLander();
-=======
             throttle = 0;
             currentFuelMass = 0;
             thrusterEnabled = false;
-            animator.SetBool("isThrusting", false); 
->>>>>>> Stashed changes
         }
+
+        animator.SetBool("isThrusting", false);
     }
 
     public PhysicsData GetPhysicsData()

@@ -7,8 +7,6 @@ public class GameSceneManager : MonoBehaviour
     // Start is called before the first frame update
 
     public LanderController lander;
-    public ThrustController thrustController;
-
     public enum Scenario { Moon, Mars };
     public enum SimulationMode { Arcade, FullPhys}
 
