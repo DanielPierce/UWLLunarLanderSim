@@ -70,7 +70,6 @@ public class GameSceneManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             lander.ToggleThruster();
-            thrustController.ToggleThruster();
         }
         if(Input.GetKeyDown(KeyCode.R))
         {
