@@ -107,7 +107,7 @@ public class LanderController : MonoBehaviour
                 //Add UI popup for soft landing here
 
                 //Toggle off thrusters
-                thrusterEnabled = false;
+                
             }
             else if (velocity < hardLandingMaxSpeed)
             {
@@ -120,7 +120,7 @@ public class LanderController : MonoBehaviour
                 currentFuelMass = currentFuelMass * 0.8f;
 
                 //Toggle off thrusters
-                thrusterEnabled = false;
+                
             }
             else
             {
