@@ -42,6 +42,9 @@ public class LanderController : MonoBehaviour
     
     public Image crashLanding;
 
+    public Collider2D landerCollider;
+    private Collider2D mostRecentCollision;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -103,8 +106,14 @@ public class LanderController : MonoBehaviour
         sprite.transform.position = transform.position;
     }
 
+    public bool IsLanded()
+    {
+        return mostRecentCollision == null ? false : landerCollider.IsTouching(mostRecentCollision);
+    }
+
     void OnCollisionEnter2D(Collision2D targetObj)
     {
+        mostRecentCollision = targetObj.collider;
         // If we handle collisions like this, make sure to correctly assign tags to
         // the good/bad landing zone objects
         if (targetObj.gameObject.tag == "FlatTerrain")
