@@ -41,6 +41,7 @@ public class LanderController : MonoBehaviour
     public Animator animator;
     
     public Image crashLanding;
+    public Image softLanding;
 
     // Start is called before the first frame update
     void Start()
@@ -117,7 +118,7 @@ public class LanderController : MonoBehaviour
                 Debug.Log("Soft landing @ speed: " + velocity);
 
                 //Add UI popup for soft landing here
-
+                softLanding.enabled = true;
                 //Toggle off thrusters
             }
             else if (velocity < hardLandingMaxSpeed)
@@ -126,7 +127,6 @@ public class LanderController : MonoBehaviour
                 Debug.Log("Hard landing @ speed: " + velocity);
 
                 //Add UI popup for hard landing here
-                crashLanding.enabled = true;
 
                 //Add any damages here(20% fuel loss for now)
                 currentFuelMass = currentFuelMass * 0.8f;

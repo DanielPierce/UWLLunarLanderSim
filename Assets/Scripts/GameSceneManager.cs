@@ -10,6 +10,7 @@ public class GameSceneManager : MonoBehaviour
     public LanderController lander;
 
     public Image crashLanding;
+    public Image softLanding;
     public enum Scenario { Moon, Mars };
     public enum SimulationMode { Arcade, FullPhys}
 
@@ -68,7 +69,7 @@ public class GameSceneManager : MonoBehaviour
             {
                 //Can probably put fudge factor here, set time to like 0.8f instead of 1
                 Time.timeScale = 1;
-
+                softLanding.enabled = false;
                 crashLanding.enabled = false;
             }
         }
