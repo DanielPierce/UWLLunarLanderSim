@@ -37,7 +37,7 @@ public class LanderController : MonoBehaviour
     protected float internalRotation;
 
     public SpriteRenderer sprite;
-
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +75,8 @@ public class LanderController : MonoBehaviour
             currentFuelMass -= burnRate * throttle * Time.deltaTime;
             currentFuelMass = Mathf.Max(currentFuelMass, 0);
             body.mass = drymass + currentFuelMass;
+
+            animator.SetBool("isThrusting", true); 
         }
 
         recordPostPhysicsVariables();
@@ -103,23 +105,62 @@ public class LanderController : MonoBehaviour
             {
                 //soft landing
                 Debug.Log("Soft landing @ speed: " + velocity);
+<<<<<<< Updated upstream
+=======
+
+                //Add UI popup for soft landing here
+
+                //Toggle off thrusters
+                animator.SetBool("isThrusting", false); 
+>>>>>>> Stashed changes
             }
             else if (velocity < hardLandingMaxSpeed)
             {
                 //Hard Landing
                 Debug.Log("Hard landing @ speed: " + velocity);
+<<<<<<< Updated upstream
             }
             else
             {
                 // Crashed, reset position
                 ResetLander();
+=======
+
+                //Add UI popup for hard landing here
+
+                //Add any damages here(20% fuel loss for now)
+                currentFuelMass = currentFuelMass * 0.8f;
+
+                //Toggle off thrusters
+                animator.SetBool("isThrusting", false); 
+            }
+            else
+            {
+                Debug.Log("Crashed @ speed: " + velocity);
+                //Crashed
+
+                //Add UI popup for crashing here
+
+                //Drain remaining fuel (for now) to remove lander's ability to fly
+                throttle = 0;
+                currentFuelMass = 0;
+                thrusterEnabled = false;
+                animator.SetBool("isThrusting", false); 
+>>>>>>> Stashed changes
             }
 
         }
 
         if (targetObj.gameObject.tag == "CrashTerrain")
         {
+<<<<<<< Updated upstream
             ResetLander();
+=======
+            throttle = 0;
+            currentFuelMass = 0;
+            thrusterEnabled = false;
+            animator.SetBool("isThrusting", false); 
+>>>>>>> Stashed changes
         }
     }
 

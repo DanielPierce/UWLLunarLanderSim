@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ThrustController : MonoBehaviour
 {
-  public bool isThrusting = true;
   public Animator animator;
 
   // Start is called before the first frame update

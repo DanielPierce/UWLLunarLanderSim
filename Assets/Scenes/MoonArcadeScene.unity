@@ -300,7 +300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9367b2f7f48cad4595ee811092d0f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isThrusting: 1
   animator: {fileID: 653890080}
 --- !u!212 &653890082
 SpriteRenderer:
@@ -461,6 +460,7 @@ MonoBehaviour:
   drymass: 0
   originalPos: {x: 0, y: 0}
   sprite: {fileID: 1029418298}
+  animator: {fileID: 653890080}
 --- !u!4 &733349038
 Transform:
   m_ObjectHideFlags: 0
