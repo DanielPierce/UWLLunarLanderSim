@@ -31,8 +31,8 @@ public class LanderController : MonoBehaviour
 
     protected bool thrusterEnabled = true;
 
-    protected const float safeLandingMaxSpeed = 30.0f;
-    protected const float hardLandingMaxSpeed = 60.0f;
+    protected const float safeLandingMaxSpeed = 3.0f;
+    protected const float hardLandingMaxSpeed = 6.0f;
 
     protected float internalRotation;
 
@@ -103,23 +103,47 @@ public class LanderController : MonoBehaviour
             {
                 //soft landing
                 Debug.Log("Soft landing @ speed: " + velocity);
+
+                //Add UI popup for soft landing here
+
+                //Toggle off thrusters
+                thrusterEnabled = false;
             }
             else if (velocity < hardLandingMaxSpeed)
             {
                 //Hard Landing
                 Debug.Log("Hard landing @ speed: " + velocity);
+
+                //Add UI popup for hard landing here
+
+                //Add any damages here(20% fuel loss for now)
+                currentFuelMass = currentFuelMass * 0.8f;
+
+                //Toggle off thrusters
+                thrusterEnabled = false;
             }
             else
             {
-                // Crashed, reset position
-                ResetLander();
+                Debug.Log("Crashed @ speed: " + velocity);
+                //Crashed
+
+                //Add UI popup for crashing here
+
+                //Drain remaining fuel (for now) to remove lander's ability to fly
+                throttle = 0;
+                currentFuelMass = 0;
+                thrusterEnabled = false;
+                
             }
 
         }
 
         if (targetObj.gameObject.tag == "CrashTerrain")
         {
-            ResetLander();
+            throttle = 0;
+            currentFuelMass = 0;
+            thrusterEnabled = false;
+            
         }
     }
 
