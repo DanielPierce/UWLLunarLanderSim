@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using static GameSceneManager;
 
 public class LanderController : MonoBehaviour
@@ -38,6 +39,8 @@ public class LanderController : MonoBehaviour
 
     public SpriteRenderer sprite;
     public Animator animator;
+    
+    public Image crashLanding;
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +126,7 @@ public class LanderController : MonoBehaviour
                 Debug.Log("Hard landing @ speed: " + velocity);
 
                 //Add UI popup for hard landing here
+                crashLanding.enabled = true;
 
                 //Add any damages here(20% fuel loss for now)
                 currentFuelMass = currentFuelMass * 0.8f;
@@ -136,23 +140,22 @@ public class LanderController : MonoBehaviour
                 //Crashed
 
                 //Add UI popup for crashing here
-
+                crashLanding.enabled = true;
                 //Drain remaining fuel (for now) to remove lander's ability to fly
                 throttle = 0;
                 currentFuelMass = 0;
-                thrusterEnabled = false;
             }
 
         }
 
         if (targetObj.gameObject.tag == "CrashTerrain")
         {
-            ResetLander();
             throttle = 0;
             currentFuelMass = 0;
-            thrusterEnabled = false;
+            crashLanding.enabled = true; 
         }
 
+        thrusterEnabled = false;
         animator.SetBool("isThrusting", false);
     }
 
