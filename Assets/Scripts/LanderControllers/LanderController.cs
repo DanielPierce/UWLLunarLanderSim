@@ -46,7 +46,7 @@ public class LanderController : MonoBehaviour
     private Collider2D mostRecentCollision;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         record = new PhysicsData();
         originalPos = new Vector2(body.position.x, body.position.y);
