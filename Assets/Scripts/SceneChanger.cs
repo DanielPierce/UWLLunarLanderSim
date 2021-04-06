@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-  public void changeScene()
+  public void changeSceneMoonArcade()
   {
     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+  }
+
+  public void changeSceneMoonRealPhysics()
+  {
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
   }
 }

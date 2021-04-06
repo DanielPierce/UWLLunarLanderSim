@@ -31,8 +31,8 @@ public class LanderController : MonoBehaviour
 
     protected bool thrusterEnabled = true;
 
-    protected const float safeLandingMaxSpeed = 30.0f;
-    protected const float hardLandingMaxSpeed = 60.0f;
+    protected const float safeLandingMaxSpeed = 3.0f;
+    protected const float hardLandingMaxSpeed = 6.0f;
 
     protected float internalRotation;
 
@@ -114,6 +114,14 @@ public class LanderController : MonoBehaviour
             {
                 //Hard Landing
                 Debug.Log("Hard landing @ speed: " + velocity);
+
+                //Add UI popup for hard landing here
+
+                //Add any damages here(20% fuel loss for now)
+                currentFuelMass = currentFuelMass * 0.8f;
+
+                //Toggle off thrusters
+                
             }
             else
             {
