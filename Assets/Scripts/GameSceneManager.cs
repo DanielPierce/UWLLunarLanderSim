@@ -46,7 +46,7 @@ public class GameSceneManager : MonoBehaviour
         //others scenarios?
         if(simMode == SimulationMode.Arcade)
         {
-            lander.body.angularDrag = 100;
+            lander.body.angularDrag = 0;
         }
     }
 
