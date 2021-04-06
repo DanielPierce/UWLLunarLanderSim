@@ -78,6 +78,13 @@ public class LanderController : MonoBehaviour
 
             animator.SetBool("isThrusting", true); 
         }
+        else {
+            animator.SetBool("isThrusting", false); 
+        }
+
+        if (throttle == 0) {
+            animator.SetBool("isThrusting", false); 
+        }
 
         recordPostPhysicsVariables();
 
