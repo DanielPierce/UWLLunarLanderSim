@@ -37,7 +37,7 @@ public class LanderController : MonoBehaviour
     protected float internalRotation;
 
     public SpriteRenderer sprite;
-
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +75,8 @@ public class LanderController : MonoBehaviour
             currentFuelMass -= burnRate * throttle * Time.deltaTime;
             currentFuelMass = Mathf.Max(currentFuelMass, 0);
             body.mass = drymass + currentFuelMass;
+
+            animator.SetBool("isThrusting", true); 
         }
 
         recordPostPhysicsVariables();
@@ -107,7 +109,6 @@ public class LanderController : MonoBehaviour
                 //Add UI popup for soft landing here
 
                 //Toggle off thrusters
-                
             }
             else if (velocity < hardLandingMaxSpeed)
             {
@@ -133,18 +134,19 @@ public class LanderController : MonoBehaviour
                 throttle = 0;
                 currentFuelMass = 0;
                 thrusterEnabled = false;
-                
             }
 
         }
 
         if (targetObj.gameObject.tag == "CrashTerrain")
         {
+            ResetLander();
             throttle = 0;
             currentFuelMass = 0;
             thrusterEnabled = false;
-            
         }
+
+        animator.SetBool("isThrusting", false);
     }
 
     public PhysicsData GetPhysicsData()
