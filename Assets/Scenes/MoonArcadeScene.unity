@@ -522,6 +522,7 @@ MonoBehaviour:
   sprite: {fileID: 1029418298}
   animator: {fileID: 653890080}
   crashLanding: {fileID: 1837436154}
+  landerCollider: {fileID: 733349035}
 --- !u!4 &733349038
 Transform:
   m_ObjectHideFlags: 0
