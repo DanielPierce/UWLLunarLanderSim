@@ -5,6 +5,7 @@ using UnityEngine;
 public class ThrustController : MonoBehaviour
 {
   public bool isThrusting = true;
+  public Animator animator;
 
   // Start is called before the first frame update
   void Start()
@@ -15,18 +16,17 @@ public class ThrustController : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (
-    }
+  }
 
-  void ToggleThruster()
+  public void ToggleThruster()
   {
-    if (isThrusting)
+    if (animator.GetBool("isThrusting"))
     {
-      isThrusting = false;
+      animator.SetBool("isThrusting", false);
     }
     else
     {
-      isThrusting = true;
+      animator.SetBool("isThrusting", true);
     }
   }
 }
