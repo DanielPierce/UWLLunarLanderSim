@@ -134,6 +134,7 @@ public class LanderController : MonoBehaviour
 
         //Add UI popup for hard landing here
         hardLanding.enabled = true;
+        gsm.changePause();
         //Add any damages here(20% fuel loss for now)
         currentFuelMass = currentFuelMass * 0.8f;
 

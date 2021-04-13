@@ -94,6 +94,7 @@ public class GameSceneManager : MonoBehaviour
 
   void OnGUI()
   {
+    /*
     GUI.Label(new Rect(20, 20, 250, 20), "Net force:    " + landerData.netForce);
     GUI.Label(new Rect(20, 40, 250, 20), "Net torque:   " + landerData.netTorque);
     GUI.Label(new Rect(20, 60, 250, 20), "Angular vel:  " + landerData.angularVelocity);
@@ -106,6 +107,7 @@ public class GameSceneManager : MonoBehaviour
     GUI.Label(new Rect(20, 200, 250, 20), "Thrust force: " + landerData.thrustForce);
     GUI.Label(new Rect(20, 240, 250, 20), "Current fuel: " + lander.currentFuelMass);
     GUI.Label(new Rect(20, 260, 250, 20), "Throttle:     " + lander.throttle);
+    */
   }
 
   void FixedUpdate()
