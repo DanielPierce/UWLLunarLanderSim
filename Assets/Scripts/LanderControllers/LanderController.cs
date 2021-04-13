@@ -95,6 +95,8 @@ public class LanderController : MonoBehaviour
       animator.SetBool("isThrusting", false);
     }
 
+    animator.SetFloat("thrustAmount", throttle);
+
     recordPostPhysicsVariables();
 
     OnPhysicsUpdate();
