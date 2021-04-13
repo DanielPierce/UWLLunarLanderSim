@@ -34,6 +34,8 @@ public class LanderController : MonoBehaviour
 
     protected const float safeLandingMaxSpeed = 3.0f;
     protected const float hardLandingMaxSpeed = 6.0f;
+    protected const float safeLandingAngle = 15.0f;
+    protected const float hardLandingAngle = 45.0f;
 
     protected float internalRotation;
 
@@ -114,28 +116,27 @@ public class LanderController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D targetObj)
     {
         mostRecentCollision = targetObj.collider;
-        // If we handle collisions like this, make sure to correctly assign tags to
-        // the good/bad landing zone objects
-        if (targetObj.gameObject.tag == "FlatTerrain")
+    
+        if (targetObj.gameObject.tag == "FlatTerrain"  )
         {
             float velocity = targetObj.relativeVelocity.magnitude;
+            float landingAngle = Mathf.Abs(body.rotation);
             // Check if velocity/orientation are good
-            if (velocity <= safeLandingMaxSpeed)
+            if (velocity <= safeLandingMaxSpeed && landingAngle <= safeLandingAngle)
             {
                 //soft landing
-                Debug.Log("Soft landing @ speed: " + velocity);
-
+                Debug.Log("Soft landing @ speed: " + velocity + ", Angle: " + landingAngle);
+                
                 //Add UI popup for soft landing here
 
                 //Toggle off thrusters
             }
-            else if (velocity < hardLandingMaxSpeed)
+            else if (velocity <= hardLandingMaxSpeed && landingAngle <= safeLandingAngle)
             {
-                //Hard Landing
-                Debug.Log("Hard landing @ speed: " + velocity);
+                //Hard Landing due to speed
+                Debug.Log("Hard landing (speed) @ speed: " + velocity + ", Angle: " + landingAngle);
 
                 //Add UI popup for hard landing here
-                crashLanding.enabled = true;
 
                 //Add any damages here(20% fuel loss for now)
                 currentFuelMass = currentFuelMass * 0.8f;
@@ -143,9 +144,35 @@ public class LanderController : MonoBehaviour
                 //Toggle off thrusters
                 
             }
+            else if (velocity <= safeLandingMaxSpeed && landingAngle <= hardLandingAngle)
+            {
+                //Hard Landing due to angle
+                Debug.Log("Hard landing (angle) @ speed: " + velocity + ", Angle: " + landingAngle);
+
+                //Add UI popup for hard landing here
+
+                //Add any damages here(20% fuel loss for now)
+                currentFuelMass = currentFuelMass * 0.8f;
+
+                //Toggle off thrusters
+
+            }
+            else if (velocity <= hardLandingMaxSpeed && landingAngle <= hardLandingAngle)
+            {
+                //Hard Landing due to both
+                Debug.Log("Hard landing (speed & angle) @ speed: " + velocity + ", Angle: " + landingAngle);
+
+                //Add UI popup for hard landing here
+
+                //Add any damages here(20% fuel loss for now)
+                currentFuelMass = currentFuelMass * 0.8f;
+
+                //Toggle off thrusters
+
+            }
             else
             {
-                Debug.Log("Crashed @ speed: " + velocity);
+                Debug.Log("Crashed @ speed: " + velocity + ", Angle: " + landingAngle);
                 //Crashed
 
                 //Add UI popup for crashing here
