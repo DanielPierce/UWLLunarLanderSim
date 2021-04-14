@@ -47,6 +47,8 @@ public class LanderController : MonoBehaviour
     public Collider2D landerCollider;
     private Collider2D mostRecentCollision;
 
+    private bool isRotationApplied;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -97,6 +99,8 @@ public class LanderController : MonoBehaviour
         recordPostPhysicsVariables();
 
         OnPhysicsUpdate();
+
+        isRotationApplied = false;
     }
 
     public virtual void OnPhysicsUpdate()
@@ -106,6 +110,20 @@ public class LanderController : MonoBehaviour
 
         sprite.transform.rotation = transform.rotation;
         sprite.transform.position = transform.position;
+
+        if(body.angularVelocity != 0 && !isRotationApplied)
+        {
+            if(body.angularVelocity > 0.0001)
+            {
+                record.netTorque = torque * -1;
+                body.AddTorque(record.netTorque, ForceMode2D.Impulse);
+            }
+            if(body.angularVelocity < -0.0001)
+            {
+                record.netTorque = torque;
+                body.AddTorque(record.netTorque, ForceMode2D.Impulse);
+            }
+        }
     }
 
     public bool IsLanded()
@@ -202,6 +220,7 @@ public class LanderController : MonoBehaviour
 
     protected virtual void initializeTimestepVariables()
     {
+
         // Add affects of gravity
         Vector2 gravForce = Vector2.down * gravity * body.mass;
         body.AddForce(gravForce * Time.deltaTime, ForceMode2D.Impulse);
@@ -260,6 +279,7 @@ public class LanderController : MonoBehaviour
         // Rotate counterclockwise in the Z plane here
         record.netTorque = torque;
         body.AddTorque(record.netTorque, ForceMode2D.Impulse);
+        isRotationApplied = true;
     }
 
     public virtual void RotateRight()
@@ -267,6 +287,7 @@ public class LanderController : MonoBehaviour
         // Rotate clockwise in the Z plane here
         record.netTorque = torque * -1;
         body.AddTorque(record.netTorque, ForceMode2D.Impulse);
+        isRotationApplied = true;
     }
 
     public void ToggleThruster()
