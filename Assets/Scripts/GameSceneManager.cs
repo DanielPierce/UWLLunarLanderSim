@@ -9,7 +9,11 @@ public class GameSceneManager : MonoBehaviour
 
     public LanderController lander;
 
-    public Image crashLanding;
+    public Image softLandingPopup;
+    public Image hardLandingPopup;
+    public Image crashLandingPopup;
+    public Image pausePopup;
+    public Image offScreenPopup;
     public enum Scenario { Moon, Mars };
     public enum SimulationMode { Arcade, FullPhys}
 
@@ -58,19 +62,7 @@ public class GameSceneManager : MonoBehaviour
         // If the space key was pressed this frame
         if (Input.GetKeyDown(KeyCode.P))
         {
-            // Pause or unpause
-            isPaused = !isPaused;
-            if (isPaused)
-            {
-                Time.timeScale = 0;
-            }
-            else
-            {
-                //Can probably put fudge factor here, set time to like 0.8f instead of 1
-                Time.timeScale = 1;
-
-                crashLanding.enabled = false;
-            }
+            changePause();
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -79,25 +71,46 @@ public class GameSceneManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         {
             lander.ResetLander();
-            crashLanding.enabled = false;
+            crashLandingPopup.enabled = false;
+        }
+    }
+
+    public void changePause() {
+        // Pause of unpause
+        isPaused = !isPaused; 
+        if (!lander.IsLanded()) {
+            pausePopup.enabled = true;
+        }
+        if (isPaused) {
+            Time.timeScale = 0;
+        }
+        else {
+            Time.timeScale = 1;
+            softLandingPopup.enabled = false;
+            hardLandingPopup.enabled = false;
+            crashLandingPopup.enabled = false;
+            pausePopup.enabled = false;
         }
     }
 
     void OnGUI()
     {
+        /*
         GUI.Label(new Rect(20, 20, 250, 20), "Net force:    " + landerData.netForce);
         GUI.Label(new Rect(20, 40, 250, 20), "Net torque:   " + landerData.netTorque);
         GUI.Label(new Rect(20, 60, 250, 20), "Angular vel:  " + landerData.angularVelocity);
         GUI.Label(new Rect(20, 80, 250, 20), "Angular acc:  " + landerData.angularAcceleration);
         GUI.Label(new Rect(20, 100, 250, 20), "Velocity:     " + landerData.velocity);
         GUI.Label(new Rect(20, 120, 250, 20), "Acceleration: " + landerData.acceleration);
-        GUI.Label(new Rect(20, 140, 250, 20), "Altitude:     " + landerData.altitude);
         GUI.Label(new Rect(20, 160, 250, 20), "Rotation:     " + landerData.degreesRotated);
         GUI.Label(new Rect(20, 180, 250, 20), "Internal Rot: " + landerData.internalRotation);
         GUI.Label(new Rect(20, 200, 250, 20), "Thrust force: " + landerData.thrustForce);
         GUI.Label(new Rect(20, 220, 250, 20), "Is landed:    " + lander.IsLanded());
         GUI.Label(new Rect(20, 240, 250, 20), "Current fuel: " + lander.currentFuelMass);
         GUI.Label(new Rect(20, 260, 250, 20), "Throttle:     " + lander.throttle);
+        */
+
+        GUI.Label(new Rect(20, 140, 250, 20), "Altitude:     " + landerData.altitude);
     }
 
     void FixedUpdate()
