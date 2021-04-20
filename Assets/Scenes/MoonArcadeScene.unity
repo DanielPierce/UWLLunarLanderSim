@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 79133587}
   m_Layer: 0
   m_Name: Zone3Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,7 +290,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79133585}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -942,11 +942,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0010d70b705297d4ba227f6a2c4d687a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainCamera: {fileID: 0}
-  Zone1Cam: {fileID: 0}
-  Zone2Cam: {fileID: 0}
-  Zone3Cam: {fileID: 0}
-  UI: {fileID: 0}
+  MainCamera: {fileID: 519420031}
+  Zone1Cam: {fileID: 1312995551}
+  Zone2Cam: {fileID: 1354882228}
+  Zone3Cam: {fileID: 79133587}
+  UI: {fileID: 1938153062}
 --- !u!1 &733349034
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,7 +2034,7 @@ GameObject:
   - component: {fileID: 1312995551}
   m_Layer: 0
   m_Name: Zone1Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2060,7 +2060,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312995548}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -2195,7 +2195,7 @@ GameObject:
   - component: {fileID: 1354882228}
   m_Layer: 0
   m_Name: Zone2Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2221,7 +2221,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354882226}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}

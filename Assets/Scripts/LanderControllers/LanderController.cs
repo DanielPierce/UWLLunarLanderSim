@@ -255,8 +255,9 @@ public class LanderController : MonoBehaviour
             //Add UI popup for flying off screen here
             offScreen.enabled = true;
         }
-        else if(obj.gameObject.tag == "CameraZoneCollider")
+        else if(obj.gameObject.tag == "ZoneCameraCollider")
         {
+            Debug.Log("Collider " + obj.name.ToCharArray()[4]);
             switch(obj.name.ToCharArray()[4])
             {
                 case '1':
@@ -273,7 +274,10 @@ public class LanderController : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D obj)
     {
-        LeaveCamZoneEvent.Invoke();
+        if(obj.tag == "ZoneCameraCollider")
+        {
+            LeaveCamZoneEvent.Invoke();
+        }
     }
 
     public PhysicsData GetPhysicsData()
