@@ -4,7 +4,7 @@ using static GameSceneManager;
 
 public class LanderController : MonoBehaviour
 {
-
+  public Camera camera;
   public Rigidbody2D body;
   public int thrust;
   public float gravity;
@@ -57,6 +57,9 @@ public class LanderController : MonoBehaviour
   // Fixed update is called every physics step
   public virtual void FixedUpdate()
   {
+    camera.orthographicSize = record.altitude;
+    //camera.transform.position.x = transform.position.x;
+
     initializeTimestepVariables();
 
     if (currentFuelMass <= 0)

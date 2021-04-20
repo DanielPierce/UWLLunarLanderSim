@@ -18,6 +18,7 @@ public class UIText : MonoBehaviour
   {
     gui.fontSize = 24;
     gui.normal.textColor = Color.white;
+    Debug.Log(this.transform.position.x);
   }
 
   void Update()
@@ -28,7 +29,7 @@ public class UIText : MonoBehaviour
 
   void OnGUI()
   {
-    GUI.Label(new Rect(80, 65, 200, 20), "" + Mathf.Round(100 * lander.throttle), gui);
+    GUI.Label(new Rect(80, 65, 200, 20), "" + Mathf.Round(physicsData.thrustForce.magnitude), gui);
     GUI.Label(new Rect(220, 65, 200, 20), "" + Mathf.Round(lander.currentFuelMass), gui);
     GUI.Label(new Rect(115, 220, 200, 20), "X: " + Mathf.Round(physicsData.velocity.x) + "   Y:" + Mathf.Round(physicsData.velocity.y), gui);
     GUI.Label(new Rect(115, 380, 200, 20), "X: " + Mathf.Round(physicsData.acceleration.x) + "   Y:" + Mathf.Round(physicsData.acceleration.y), gui);
