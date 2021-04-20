@@ -280,7 +280,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 47.68658
+  orthographic size: 52.513092
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -523,6 +523,7 @@ MonoBehaviour:
   animator: {fileID: 653890080}
   crashLanding: {fileID: 1837436154}
   landerCollider: {fileID: 733349035}
+  sectimer: 3
 --- !u!4 &733349038
 Transform:
   m_ObjectHideFlags: 0
@@ -1040,6 +1041,76 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122516267}
   m_CullTransparentMesh: 0
+--- !u!1 &1218763091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1218763092}
+  - component: {fileID: 1218763094}
+  - component: {fileID: 1218763093}
+  m_Layer: 0
+  m_Name: MapBorder
+  m_TagString: MapBorder
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1218763092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218763091}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 38.06653, y: 28.661282, z: -120.4694}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &1218763093
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218763091}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -135.74088, y: 65.431015}
+  - {x: -135.81534, y: -19.57162}
+  - {x: -129.94461, y: -19.547264}
+--- !u!68 &1218763094
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218763091}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 92.12802, y: 65.58634}
+  - {x: 92.265854, y: -21.253819}
+  - {x: 85.09682, y: -21.500402}
 --- !u!1 &1332494695
 GameObject:
   m_ObjectHideFlags: 0

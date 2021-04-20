@@ -220,6 +220,18 @@ public class LanderController : MonoBehaviour
         animator.SetBool("isThrusting", false);
     }
 
+    void OnCollisionExit2D(Collision2D obj)
+    {
+        if(obj.gameObject.tag == "MapBorder")
+        {
+            throttle = 0;
+            currentFuelMass = 0;
+            
+
+            //Add UI popup for flying off screen here
+        }
+    }
+
     public PhysicsData GetPhysicsData()
     {
         return record;
