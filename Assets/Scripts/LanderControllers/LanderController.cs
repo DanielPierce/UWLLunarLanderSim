@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using static GameSceneManager;
 
@@ -54,6 +55,11 @@ public class LanderController : MonoBehaviour
     private bool isRotationApplied;
 
     public float sectimer = 5.0f;
+
+    public UnityEvent CamZone1Event;
+    public UnityEvent CamZone2Event;
+    public UnityEvent CamZone3Event;
+    public UnityEvent LeaveCamZoneEvent;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -248,6 +254,29 @@ public class LanderController : MonoBehaviour
 
             //Add UI popup for flying off screen here
             offScreen.enabled = true;
+        }
+        else if(obj.gameObject.tag == "ZoneCameraCollider")
+        {
+            Debug.Log("Collider " + obj.name.ToCharArray()[4]);
+            switch(obj.name.ToCharArray()[4])
+            {
+                case '1':
+                    CamZone1Event.Invoke();
+                    break;
+                case '2':
+                    CamZone2Event.Invoke();
+                    break;
+                case '3':
+                    CamZone3Event.Invoke();
+                    break;
+            }
+        }
+    }
+    void OnTriggerExit2D(Collider2D obj)
+    {
+        if(obj.tag == "ZoneCameraCollider")
+        {
+            LeaveCamZoneEvent.Invoke();
         }
     }
 
