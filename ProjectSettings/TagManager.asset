@@ -7,6 +7,7 @@ TagManager:
   - FlatTerrain
   - CrashTerrain
   - MapBorder
+  - ZoneCameraCollider
   layers:
   - Default
   - TransparentFX

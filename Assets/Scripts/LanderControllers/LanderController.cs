@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using static GameSceneManager;
 
@@ -54,6 +55,10 @@ public class LanderController : MonoBehaviour
     private bool isRotationApplied;
 
     public float sectimer = 5.0f;
+
+    public UnityEvent CamZone1Event;
+    public UnityEvent CamZone2Event;
+    public UnityEvent CamZone3Event;
 
     // Start is called before the first frame update
     public virtual void Start()
