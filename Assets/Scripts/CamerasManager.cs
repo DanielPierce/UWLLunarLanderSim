@@ -33,7 +33,7 @@ public class CamerasManager : MonoBehaviour
     }
     public void OnCam2()
     {
-        UI.worldCamera = Zone1Cam;
+        UI.worldCamera = Zone2Cam;
         MainCamera.enabled = false;
         Zone1Cam.enabled = false;
         Zone2Cam.enabled = true;
@@ -41,7 +41,7 @@ public class CamerasManager : MonoBehaviour
     }
     public void OnCam3()
     {
-        UI.worldCamera = Zone1Cam;
+        UI.worldCamera = Zone3Cam;
         MainCamera.enabled = false;
         Zone1Cam.enabled = false;
         Zone2Cam.enabled = false;
@@ -49,7 +49,7 @@ public class CamerasManager : MonoBehaviour
     }
     public void OnMainCam()
     {
-        UI.worldCamera = Zone1Cam;
+        UI.worldCamera = MainCamera;
         MainCamera.enabled = true;
         Zone1Cam.enabled = false;
         Zone2Cam.enabled = false;
