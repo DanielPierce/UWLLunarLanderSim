@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FlatTerrain
   - CrashTerrain
+  - MapBorder
   layers:
   - Default
   - TransparentFX
