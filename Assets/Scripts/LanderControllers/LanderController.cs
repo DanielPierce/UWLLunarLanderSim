@@ -104,7 +104,14 @@ public class LanderController : MonoBehaviour
 
         isRotationApplied = false;
 
-        sectimer = sectimer - Time.deltaTime;
+        if (IsLanded() == false)
+        {
+            sectimer = sectimer - Time.deltaTime;
+        }
+        else
+        {
+            sectimer = 5.0f;
+        }
     }
 
     public virtual void OnPhysicsUpdate()
