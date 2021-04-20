@@ -4,7 +4,6 @@ using static GameSceneManager;
 
 public class LanderController : MonoBehaviour
 {
-
     public Rigidbody2D body;
     public int thrust;
     public float gravity;
@@ -42,7 +41,12 @@ public class LanderController : MonoBehaviour
     public SpriteRenderer sprite;
     public Animator animator;
     
+    public Image softLanding;
+    public Image hardLanding;
     public Image crashLanding;
+    public Image offScreen;
+
+    public GameSceneManager gameSceneManager;
 
     public Collider2D landerCollider;
     private Collider2D mostRecentCollision;
@@ -97,6 +101,8 @@ public class LanderController : MonoBehaviour
         if (throttle == 0) {
             animator.SetBool("isThrusting", false); 
         }
+
+        //animator.SetFloat("thrustAmount", throttle);
 
         recordPostPhysicsVariables();
 
@@ -160,8 +166,9 @@ public class LanderController : MonoBehaviour
                     Debug.Log("Soft landing @ speed: " + velocity + ", Angle: " + landingAngle);
 
                     //Add UI popup for soft landing here
-
+                    softLanding.enabled = true;
                     //Toggle off thrusters
+                    gameSceneManager.changePause();
                 }
                 else if (velocity <= hardLandingMaxSpeed && landingAngle <= safeLandingAngle)
                 {
@@ -169,12 +176,13 @@ public class LanderController : MonoBehaviour
                     Debug.Log("Hard landing (speed) @ speed: " + velocity + ", Angle: " + landingAngle);
 
                     //Add UI popup for hard landing here
-
+                    hardLanding.enabled = true;
                     //Add any damages here(20% fuel loss for now)
                     currentFuelMass = currentFuelMass * 0.8f;
 
                     //Toggle off thrusters
 
+                    gameSceneManager.changePause();
                 }
                 else if (velocity <= safeLandingMaxSpeed && landingAngle <= hardLandingAngle)
                 {
@@ -182,12 +190,13 @@ public class LanderController : MonoBehaviour
                     Debug.Log("Hard landing (angle) @ speed: " + velocity + ", Angle: " + landingAngle);
 
                     //Add UI popup for hard landing here
-
+                    hardLanding.enabled = true;
                     //Add any damages here(20% fuel loss for now)
                     currentFuelMass = currentFuelMass * 0.8f;
 
                     //Toggle off thrusters
 
+                    gameSceneManager.changePause();
                 }
                 else if (velocity <= hardLandingMaxSpeed && landingAngle <= hardLandingAngle)
                 {
@@ -195,12 +204,13 @@ public class LanderController : MonoBehaviour
                     Debug.Log("Hard landing (speed & angle) @ speed: " + velocity + ", Angle: " + landingAngle);
 
                     //Add UI popup for hard landing here
-
+                    hardLanding.enabled = true;
                     //Add any damages here(20% fuel loss for now)
                     currentFuelMass = currentFuelMass * 0.8f;
 
                     //Toggle off thrusters
 
+                    gameSceneManager.changePause();
                 }
                 else
                 {
@@ -237,6 +247,7 @@ public class LanderController : MonoBehaviour
             Debug.Log("flew off of the screen");
 
             //Add UI popup for flying off screen here
+            offScreen.enabled = true;
         }
     }
 
