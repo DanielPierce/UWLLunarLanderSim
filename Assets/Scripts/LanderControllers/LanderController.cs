@@ -49,6 +49,8 @@ public class LanderController : MonoBehaviour
 
     private bool isRotationApplied;
 
+    public float sectimer = 5.0f;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -101,6 +103,8 @@ public class LanderController : MonoBehaviour
         OnPhysicsUpdate();
 
         isRotationApplied = false;
+
+        sectimer = sectimer - Time.deltaTime;
     }
 
     public virtual void OnPhysicsUpdate()
@@ -139,67 +143,70 @@ public class LanderController : MonoBehaviour
         {
             float velocity = targetObj.relativeVelocity.magnitude;
             float landingAngle = Mathf.Abs(body.rotation);
-            // Check if velocity/orientation are good
-            if (velocity <= safeLandingMaxSpeed && landingAngle <= safeLandingAngle)
-            {
-                //soft landing
-                Debug.Log("Soft landing @ speed: " + velocity + ", Angle: " + landingAngle);
-                
-                //Add UI popup for soft landing here
+            
 
-                //Toggle off thrusters
+            if (sectimer <= 0){
+                sectimer = 5.0f;
+                if (velocity <= safeLandingMaxSpeed && landingAngle <= safeLandingAngle)
+                {
+                    //soft landing
+                    Debug.Log("Soft landing @ speed: " + velocity + ", Angle: " + landingAngle);
+
+                    //Add UI popup for soft landing here
+
+                    //Toggle off thrusters
+                }
+                else if (velocity <= hardLandingMaxSpeed && landingAngle <= safeLandingAngle)
+                {
+                    //Hard Landing due to speed
+                    Debug.Log("Hard landing (speed) @ speed: " + velocity + ", Angle: " + landingAngle);
+
+                    //Add UI popup for hard landing here
+
+                    //Add any damages here(20% fuel loss for now)
+                    currentFuelMass = currentFuelMass * 0.8f;
+
+                    //Toggle off thrusters
+
+                }
+                else if (velocity <= safeLandingMaxSpeed && landingAngle <= hardLandingAngle)
+                {
+                    //Hard Landing due to angle
+                    Debug.Log("Hard landing (angle) @ speed: " + velocity + ", Angle: " + landingAngle);
+
+                    //Add UI popup for hard landing here
+
+                    //Add any damages here(20% fuel loss for now)
+                    currentFuelMass = currentFuelMass * 0.8f;
+
+                    //Toggle off thrusters
+
+                }
+                else if (velocity <= hardLandingMaxSpeed && landingAngle <= hardLandingAngle)
+                {
+                    //Hard Landing due to both
+                    Debug.Log("Hard landing (speed & angle) @ speed: " + velocity + ", Angle: " + landingAngle);
+
+                    //Add UI popup for hard landing here
+
+                    //Add any damages here(20% fuel loss for now)
+                    currentFuelMass = currentFuelMass * 0.8f;
+
+                    //Toggle off thrusters
+
+                }
+                else
+                {
+                    Debug.Log("Crashed @ speed: " + velocity + ", Angle: " + landingAngle);
+                    //Crashed
+
+                    //Add UI popup for crashing here
+                    crashLanding.enabled = true;
+                    //Drain remaining fuel (for now) to remove lander's ability to fly
+                    throttle = 0;
+                    currentFuelMass = 0;
+                }
             }
-            else if (velocity <= hardLandingMaxSpeed && landingAngle <= safeLandingAngle)
-            {
-                //Hard Landing due to speed
-                Debug.Log("Hard landing (speed) @ speed: " + velocity + ", Angle: " + landingAngle);
-
-                //Add UI popup for hard landing here
-
-                //Add any damages here(20% fuel loss for now)
-                currentFuelMass = currentFuelMass * 0.8f;
-
-                //Toggle off thrusters
-                
-            }
-            else if (velocity <= safeLandingMaxSpeed && landingAngle <= hardLandingAngle)
-            {
-                //Hard Landing due to angle
-                Debug.Log("Hard landing (angle) @ speed: " + velocity + ", Angle: " + landingAngle);
-
-                //Add UI popup for hard landing here
-
-                //Add any damages here(20% fuel loss for now)
-                currentFuelMass = currentFuelMass * 0.8f;
-
-                //Toggle off thrusters
-
-            }
-            else if (velocity <= hardLandingMaxSpeed && landingAngle <= hardLandingAngle)
-            {
-                //Hard Landing due to both
-                Debug.Log("Hard landing (speed & angle) @ speed: " + velocity + ", Angle: " + landingAngle);
-
-                //Add UI popup for hard landing here
-
-                //Add any damages here(20% fuel loss for now)
-                currentFuelMass = currentFuelMass * 0.8f;
-
-                //Toggle off thrusters
-
-            }
-            else
-            {
-                Debug.Log("Crashed @ speed: " + velocity + ", Angle: " + landingAngle);
-                //Crashed
-
-                //Add UI popup for crashing here
-                crashLanding.enabled = true;
-                //Drain remaining fuel (for now) to remove lander's ability to fly
-                throttle = 0;
-                currentFuelMass = 0;
-            }
-
         }
 
         if (targetObj.gameObject.tag == "CrashTerrain")
