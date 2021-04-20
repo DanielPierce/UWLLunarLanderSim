@@ -10,6 +10,8 @@ public class CamerasManager : MonoBehaviour
     public Camera Zone2Cam;
     public Camera Zone3Cam;
 
+    public Canvas UI;
+
     void Start()
     {
         
@@ -19,5 +21,38 @@ public class CamerasManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnCam1()
+    {
+        UI.worldCamera = Zone1Cam;
+        MainCamera.enabled = false;
+        Zone1Cam.enabled = true;
+        Zone2Cam.enabled = false;
+        Zone3Cam.enabled = false;
+    }
+    public void OnCam2()
+    {
+        UI.worldCamera = Zone1Cam;
+        MainCamera.enabled = false;
+        Zone1Cam.enabled = false;
+        Zone2Cam.enabled = true;
+        Zone3Cam.enabled = false;
+    }
+    public void OnCam3()
+    {
+        UI.worldCamera = Zone1Cam;
+        MainCamera.enabled = false;
+        Zone1Cam.enabled = false;
+        Zone2Cam.enabled = false;
+        Zone3Cam.enabled = true;
+    }
+    public void OnMainCam()
+    {
+        UI.worldCamera = Zone1Cam;
+        MainCamera.enabled = true;
+        Zone1Cam.enabled = false;
+        Zone2Cam.enabled = false;
+        Zone3Cam.enabled = false;
     }
 }
