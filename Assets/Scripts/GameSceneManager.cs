@@ -12,6 +12,7 @@ public class GameSceneManager : MonoBehaviour
     public Image softLandingPopup;
     public Image hardLandingPopup;
     public Image crashLandingPopup;
+    public Text crashLandingText;
     public Image pausePopup;
     public Image offScreenPopup;
     public enum Scenario { Moon, Mars };
@@ -89,6 +90,7 @@ public class GameSceneManager : MonoBehaviour
             softLandingPopup.enabled = false;
             hardLandingPopup.enabled = false;
             crashLandingPopup.enabled = false;
+            crashLandingText.enabled = false;
             pausePopup.enabled = false;
         }
     }
@@ -110,7 +112,7 @@ public class GameSceneManager : MonoBehaviour
         GUI.Label(new Rect(20, 260, 250, 20), "Throttle:     " + lander.throttle);
         */
 
-        GUI.Label(new Rect(20, 140, 250, 20), "Altitude:     " + landerData.altitude);
+       // GUI.Label(new Rect(20, 140, 250, 20), "Altitude:     " + landerData.altitude);
     }
 
     void FixedUpdate()

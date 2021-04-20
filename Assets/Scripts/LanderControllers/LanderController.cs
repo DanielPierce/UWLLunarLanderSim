@@ -30,7 +30,7 @@ public class LanderController : MonoBehaviour
     protected float throttleMin = 0f;
     protected float throttleInc = 0.001f;
 
-    protected bool thrusterEnabled = true;
+    public bool thrusterEnabled = true;
 
     protected const float safeLandingMaxSpeed = 3.0f;
     protected const float hardLandingMaxSpeed = 6.0f;
@@ -45,6 +45,7 @@ public class LanderController : MonoBehaviour
     public Image softLanding;
     public Image hardLanding;
     public Image crashLanding;
+    public Text crashLandingText;
     public Image offScreen;
 
     public GameSceneManager gameSceneManager;
@@ -228,15 +229,20 @@ public class LanderController : MonoBehaviour
                     //Drain remaining fuel (for now) to remove lander's ability to fly
                     throttle = 0;
                     currentFuelMass = 0;
+                    crashLandingText.enabled = true;
+                    crashLandingText.text = "Crash Landed at " + velocity+ " m/s";
                 }
             }
         }
 
         if (targetObj.gameObject.tag == "CrashTerrain")
         {
+            float velocity = targetObj.relativeVelocity.magnitude;
             throttle = 0;
             currentFuelMass = 0;
             crashLanding.enabled = true; 
+            crashLandingText.enabled = true;
+            crashLandingText.text = "Crash Landed at " + velocity + " m/s";
         }
 
         thrusterEnabled = false;

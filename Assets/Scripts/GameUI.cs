@@ -20,6 +20,12 @@ public class GameUI : MonoBehaviour
     public Image leftAccelVector;
     public Image rightAccelVector;
 
+    public Text altitudeText;
+    public Text velocityXText;
+    public Text velocityYText;
+    public Text accelXText;
+    public Text accelYText;
+
 
     public LanderController landerController;
 
@@ -42,8 +48,20 @@ public class GameUI : MonoBehaviour
         // Get updated physics data
         physicsData = landerController.GetPhysicsData();
 
+        // UI Texts
+        altitudeText.text = "Alt.: " + System.Math.Round(physicsData.altitude, 1).ToString() + "m";
+        velocityXText.text = "Velo X: " + System.Math.Round(physicsData.velocity.x, 1).ToString() + "m/s";
+        velocityYText.text = "Velo Y: " + System.Math.Round(physicsData.velocity.y, 1).ToString() + "m/s";
+        accelXText.text = "Accel. X: " + System.Math.Round(physicsData.acceleration.x, 1).ToString() + "m/s/s";
+        accelYText.text = "Accel. Y: " + System.Math.Round(physicsData.acceleration.y, 1).ToString() + "m/s/s";
+
         // Fillable bars
         thrust.fillAmount = landerController.throttle;
+        if (landerController.thrusterEnabled) {
+          thrust.color = new Color(0, 38, 255, 255);
+        } else  {
+          thrust.color = new Color(255, 0, 28, 255);
+        }
 
         // Over max fuel mass in end, temporary number
         fuel.fillAmount = landerController.currentFuelMass / 816;
