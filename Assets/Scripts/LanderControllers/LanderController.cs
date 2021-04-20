@@ -59,6 +59,7 @@ public class LanderController : MonoBehaviour
     public UnityEvent CamZone1Event;
     public UnityEvent CamZone2Event;
     public UnityEvent CamZone3Event;
+    public UnityEvent LeaveCamZoneEvent;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -254,6 +255,25 @@ public class LanderController : MonoBehaviour
             //Add UI popup for flying off screen here
             offScreen.enabled = true;
         }
+        else if(obj.gameObject.tag == "CameraZoneCollider")
+        {
+            switch(obj.name.ToCharArray()[4])
+            {
+                case '1':
+                    CamZone1Event.Invoke();
+                    break;
+                case '2':
+                    CamZone2Event.Invoke();
+                    break;
+                case '3':
+                    CamZone3Event.Invoke();
+                    break;
+            }
+        }
+    }
+    void OnTriggerExit2D(Collider2D obj)
+    {
+        LeaveCamZoneEvent.Invoke();
     }
 
     public PhysicsData GetPhysicsData()
