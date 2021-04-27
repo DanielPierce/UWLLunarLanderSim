@@ -5299,7 +5299,7 @@ MonoBehaviour:
   thrust: {fileID: 343344429}
   fuel: {fileID: 1424752389}
   altitude: {fileID: 1737910552}
-  attitude: {fileID: 1849512622}
+  attitude: {fileID: 17748377}
   upVelocityVector: {fileID: 1356172705}
   downVelocityVector: {fileID: 953132513}
   leftVelocityVector: {fileID: 843234191}
