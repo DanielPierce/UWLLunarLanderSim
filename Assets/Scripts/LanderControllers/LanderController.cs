@@ -167,7 +167,7 @@ public class LanderController : MonoBehaviour
     if (targetObj.gameObject.tag == "FlatTerrain")
     {
       float velocity = targetObj.relativeVelocity.magnitude;
-      float landingAngle = Mathf.Abs(body.rotation);
+      float landingAngle = Mathf.Abs(body.rotation); //NEED TO DO SOMETHING HERE TO FIX ROTATION/LANDING BUG
 
 
       if (sectimer <= 0)
