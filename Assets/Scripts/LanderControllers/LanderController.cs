@@ -28,7 +28,7 @@ public class LanderController : MonoBehaviour
 
   protected float throttleMax = 1f;
   protected float throttleMin = 0f;
-  protected float throttleInc = 0.001f;
+  protected float throttleInc = 0.003f;
 
   public bool thrusterEnabled = true;
 
