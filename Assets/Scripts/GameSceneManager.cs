@@ -105,7 +105,7 @@ public class GameSceneManager : MonoBehaviour
     }
     else
     {
-      Time.timeScale = 1;
+      Time.timeScale = .8f;
       softLandingPopup.enabled = false;
       hardLandingPopup.enabled = false;
       crashLandingPopup.enabled = false;
