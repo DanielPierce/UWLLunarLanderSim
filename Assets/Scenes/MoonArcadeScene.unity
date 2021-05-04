@@ -1479,7 +1479,7 @@ MonoBehaviour:
   crashLandingText: {fileID: 1368339670}
   softLandingText: {fileID: 1939180169}
   hardLandingText: {fileID: 1503884202}
-  offScreen: {fileID: 1837436154}
+  offScreen: {fileID: 1362080772}
   gameSceneManager: {fileID: 2072599420}
   landerCollider: {fileID: 733349035}
   sectimer: 3
@@ -3306,7 +3306,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 72ad1db37b4b63b4fa29a9c417d3afde, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 12e4e36bab2bde9418b1c90a86243699, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

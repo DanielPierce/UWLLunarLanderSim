@@ -42,6 +42,7 @@ public class GameSceneManager : MonoBehaviour
     softLandingText.enabled = false;
     hardLandingText.enabled = false;
     pausePopup.enabled = false;
+    offScreenPopup.enabled = false;
 
     lander.body.gravityScale = 0;
     if (currentLocation == Scenario.Moon)
@@ -89,6 +90,7 @@ public class GameSceneManager : MonoBehaviour
       lander.ResetLander();
       crashLandingPopup.enabled = false;
       crashLandingText.enabled = false;
+      offScreenPopup.enabled = false;
     }
   }
 
@@ -115,6 +117,7 @@ public class GameSceneManager : MonoBehaviour
       hardLandingText.enabled = false;
       pausePopup.enabled = false;
       helpPopup.enabled = false;
+      offScreenPopup.enabled = false;
     }
   }
 
