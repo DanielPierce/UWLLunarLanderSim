@@ -16,6 +16,7 @@ public class GameSceneManager : MonoBehaviour
   public Text softLandingText;
   public Text hardLandingText;
   public Image pausePopup;
+  public Image helpPopup;
   public Image offScreenPopup;
   public enum Scenario { Moon, Mars };
   public enum SimulationMode { Arcade, FullPhys }
@@ -27,12 +28,12 @@ public class GameSceneManager : MonoBehaviour
 
 
   private bool isPaused = false;
+  private bool isHelp = false;
 
   void Start()
   {
 
-    changePause();
-    changePause();
+    changeHelp();
 
     softLandingPopup.enabled = false;
     hardLandingPopup.enabled = false;
@@ -113,6 +114,17 @@ public class GameSceneManager : MonoBehaviour
       softLandingText.enabled = false;
       hardLandingText.enabled = false;
       pausePopup.enabled = false;
+    }
+  }
+
+  public void changeHelp() {
+    isHelp = !isHelp;
+    if (isHelp) {
+      helpPopup.enabled = true;
+      Time.timeScale = 0;
+    } else {
+      helpPopup.enabled = false;
+      Time.timeScale = .8f;
     }
   }
 
