@@ -114,6 +114,7 @@ public class GameSceneManager : MonoBehaviour
       softLandingText.enabled = false;
       hardLandingText.enabled = false;
       pausePopup.enabled = false;
+      helpPopup.enabled = false;
     }
   }
 
