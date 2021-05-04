@@ -77,7 +77,7 @@ public class GameSceneManager : MonoBehaviour
     landerData = lander.GetPhysicsData();
     HandleLanderThrottle();
     // If the space key was pressed this frame
-    if (Input.GetKeyDown(KeyCode.F1))
+    if (Input.GetKeyDown(KeyCode.H))
     {
       changeHelp();
     }
