@@ -10,15 +10,18 @@ public class GameUI : MonoBehaviour
     public Image altitude;
     public Image attitude;
 
-    public Image upVelocityVector;
-    public Image downVelocityVector;
-    public Image leftVelocityVector;
-    public Image rightVelocityVector;
 
-    public Image upAccelVector;
-    public Image downAccelVector;
-    public Image leftAccelVector;
-    public Image rightAccelVector;
+    public DisplayVector diagonalV;
+    public DisplayVector verticalV;
+    public DisplayVector horizontalV;
+
+    public DisplayVector diagonalA;
+    public DisplayVector verticalA;
+    public DisplayVector horizontalA;
+
+    public float velMax = 60;
+    public float accelMax = 25;
+
 
     public Text altitudeText;
     public Text velocityXText;
@@ -39,7 +42,13 @@ public class GameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        diagonalV.MaxIn = velMax;
+        verticalV.MaxIn = velMax;
+        horizontalV.MaxIn = velMax;
+
+        diagonalA.MaxIn = accelMax;
+        verticalA.MaxIn = accelMax;
+        horizontalA.MaxIn = accelMax;
     }
 
     // Update is called once per frame
@@ -49,11 +58,11 @@ public class GameUI : MonoBehaviour
         physicsData = landerController.GetPhysicsData();
 
         // UI Texts
-        altitudeText.text = "Alt.: " + System.Math.Round(physicsData.altitude, 1).ToString() + "m";
-        velocityXText.text = "Velo X: " + System.Math.Round(physicsData.velocity.x, 1).ToString() + "m/s";
-        velocityYText.text = "Velo Y: " + System.Math.Round(physicsData.velocity.y, 1).ToString() + "m/s";
-        accelXText.text = "Accel. X: " + System.Math.Round(physicsData.acceleration.x, 1).ToString() + "m/s/s";
-        accelYText.text = "Accel. Y: " + System.Math.Round(physicsData.acceleration.y, 1).ToString() + "m/s/s";
+        //altitudeText.text = "Alt.: " + System.Math.Round(physicsData.altitude, 1).ToString() + "m";
+        //velocityXText.text = "Velo X: " + System.Math.Round(physicsData.velocity.x, 1).ToString() + "m/s";
+        //velocityYText.text = "Velo Y: " + System.Math.Round(physicsData.velocity.y, 1).ToString() + "m/s";
+        //accelXText.text = "Accel. X: " + System.Math.Round(physicsData.acceleration.x, 1).ToString() + "m/s/s";
+        //accelYText.text = "Accel. Y: " + System.Math.Round(physicsData.acceleration.y, 1).ToString() + "m/s/s";
 
         // Fillable bars
         thrust.fillAmount = landerController.throttle;
@@ -66,88 +75,22 @@ public class GameUI : MonoBehaviour
         // Over max fuel mass in end, temporary number
         fuel.fillAmount = landerController.currentFuelMass / 816;
 
-        altitude.fillAmount = physicsData.altitude / 100;
+        //altitude.fillAmount = physicsData.altitude / 100;
 
 
         // Attitude Indicator
         attitude.transform.rotation = Quaternion.Euler(0, 0, -1 * physicsData.degreesRotated + 90);
 
 
+
+
         // Scalable vectors
+        diagonalV.displayVector = physicsData.velocity;
+        horizontalV.displayVector = physicsData.velocity * Vector2.right;
+        verticalV.displayVector = physicsData.velocity * Vector2.up;
 
-        // Vertical velocity vectors
-        if (physicsData.velocity.y > 0.1)
-        {
-          upVelocityVector.enabled = true;
-          downVelocityVector.enabled = false;
-          upVelocityVector.rectTransform.sizeDelta = new Vector2(vectorScale, physicsData.velocity.y * maxVelo);
-        }
-        else if (physicsData.velocity.y < -0.1)
-        {
-          downVelocityVector.enabled = true;
-          upVelocityVector.enabled = false;
-          downVelocityVector.rectTransform.sizeDelta = new Vector2(vectorScale, Mathf.Abs(physicsData.velocity.y * maxVelo));
-        }
-        else
-        {
-          downVelocityVector.enabled = false;
-          upVelocityVector.enabled = false;
-        }
-        // Horizontal velocity vectors
-        if (physicsData.velocity.x > 0.1)
-        {
-          rightVelocityVector.enabled = true;
-          leftVelocityVector.enabled = false;
-          rightVelocityVector.rectTransform.sizeDelta = new Vector2(physicsData.velocity.x * maxVelo, vectorScale);
-        }
-        else if (physicsData.velocity.x < -0.1)
-        {
-          leftVelocityVector.enabled = true;
-          rightVelocityVector.enabled = false;
-          leftVelocityVector.rectTransform.sizeDelta = new Vector2(Mathf.Abs(physicsData.velocity.x * maxVelo), vectorScale);
-        }
-        else
-        {
-          leftVelocityVector.enabled = false;
-          rightVelocityVector.enabled = false;
-        }
-
-
-        // Vertical accel vectors
-        if (physicsData.acceleration.y > 0.1)
-        {
-          upAccelVector.enabled = true;
-          downAccelVector.enabled = false;
-          upAccelVector.rectTransform.sizeDelta = new Vector2(vectorScale, physicsData.acceleration.y * maxAccel);
-        }
-        else if (physicsData.acceleration.y < -0.1)
-        {
-          downAccelVector.enabled = true;
-          upAccelVector.enabled = false;
-          downAccelVector.rectTransform.sizeDelta = new Vector2(vectorScale, Mathf.Abs(physicsData.acceleration.y * maxAccel));
-        }
-        else
-        {
-          downAccelVector.enabled = false;
-          upAccelVector.enabled = false;
-        }
-        // Horizontal Accel vectors
-        if (physicsData.acceleration.x > 0.1)
-        {
-          rightAccelVector.enabled = true;
-          leftAccelVector.enabled = false;
-          rightAccelVector.rectTransform.sizeDelta = new Vector2(physicsData.acceleration.x * maxAccel, vectorScale);
-        }
-        else if (physicsData.acceleration.x < -0.1)
-        {
-          leftAccelVector.enabled = true;
-          rightAccelVector.enabled = false;
-          leftAccelVector.rectTransform.sizeDelta = new Vector2(Mathf.Abs(physicsData.acceleration.x * maxAccel), vectorScale);
-        }
-        else
-        {
-          leftAccelVector.enabled = false;
-          rightAccelVector.enabled = false;
-        }
+        diagonalA.displayVector = physicsData.acceleration;
+        horizontalA.displayVector = physicsData.acceleration * Vector2.right;
+        verticalA.displayVector = physicsData.acceleration * Vector2.up;
     }
 }
