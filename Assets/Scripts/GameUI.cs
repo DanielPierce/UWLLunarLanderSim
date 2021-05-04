@@ -21,6 +21,7 @@ public class GameUI : MonoBehaviour
 
     public float velMax = 60;
     public float accelMax = 25;
+    public float maxOut = 100;
 
 
     public Text altitudeText;
@@ -49,6 +50,14 @@ public class GameUI : MonoBehaviour
         diagonalA.MaxIn = accelMax;
         verticalA.MaxIn = accelMax;
         horizontalA.MaxIn = accelMax;
+
+        diagonalV.MaxOut = maxOut;
+        verticalV.MaxOut = maxOut;
+        horizontalV.MaxOut = maxOut;
+
+        diagonalA.MaxOut = maxOut;
+        verticalA.MaxOut = maxOut;
+        horizontalA.MaxOut = maxOut;
     }
 
     // Update is called once per frame
