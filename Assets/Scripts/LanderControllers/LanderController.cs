@@ -70,7 +70,6 @@ public class LanderController : MonoBehaviour
     record = new PhysicsData();
     originalPos = new Vector2(body.position.x, body.position.y);
     thrusterEnabled = true;
-    gameSceneManager.changePause();
   }
 
   // Fixed update is called every physics step
