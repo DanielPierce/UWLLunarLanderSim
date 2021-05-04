@@ -167,13 +167,13 @@ public class LanderController : MonoBehaviour
     if (targetObj.gameObject.tag == "FlatTerrain")
     {
       float velocity = targetObj.relativeVelocity.magnitude;
-      float landingAngle = Mathf.Abs(body.rotation); //NEED TO DO SOMETHING HERE TO FIX ROTATION/LANDING BUG
+      float landingAngle = Mathf.Abs(body.rotation) % 360; 
 
 
       if (sectimer <= 0)
       {
         sectimer = 5.0f;
-        if (velocity <= safeLandingMaxSpeed && landingAngle <= safeLandingAngle)
+        if (velocity <= safeLandingMaxSpeed && ((landingAngle >= 0 && landingAngle <= 15) || (landingAngle >= 345 && landingAngle <= 360)))
         {
           //soft landing
           Debug.Log("Soft landing @ speed: " + velocity + ", Angle: " + landingAngle);
@@ -185,7 +185,7 @@ public class LanderController : MonoBehaviour
           //Toggle off thrusters
           gameSceneManager.changePause();
         }
-        else if (velocity <= hardLandingMaxSpeed && landingAngle <= safeLandingAngle)
+        else if (velocity <= hardLandingMaxSpeed && ((landingAngle >= 0 && landingAngle <= 15) || (landingAngle >= 345 && landingAngle <= 360)))
         {
           //Hard Landing due to speed
           Debug.Log("Hard landing (speed) @ speed: " + velocity + ", Angle: " + landingAngle);
@@ -201,7 +201,7 @@ public class LanderController : MonoBehaviour
 
           gameSceneManager.changePause();
         }
-        else if (velocity <= safeLandingMaxSpeed && landingAngle <= hardLandingAngle)
+        else if (velocity <= safeLandingMaxSpeed && ((landingAngle >= 0 && landingAngle <= 45) || (landingAngle >= 315 && landingAngle <= 360)))
         {
           //Hard Landing due to angle
           Debug.Log("Hard landing (angle) @ speed: " + velocity + ", Angle: " + landingAngle);
@@ -217,7 +217,7 @@ public class LanderController : MonoBehaviour
 
           gameSceneManager.changePause();
         }
-        else if (velocity <= hardLandingMaxSpeed && landingAngle <= hardLandingAngle)
+        else if (velocity <= hardLandingMaxSpeed && ((landingAngle >= 0 && landingAngle <= 45) || (landingAngle >= 315 && landingAngle <= 360)))
         {
           //Hard Landing due to both
           Debug.Log("Hard landing (speed & angle) @ speed: " + velocity + ", Angle: " + landingAngle);
