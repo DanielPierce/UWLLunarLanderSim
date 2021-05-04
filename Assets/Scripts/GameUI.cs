@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameUI : MonoBehaviour
 {
@@ -25,11 +26,13 @@ public class GameUI : MonoBehaviour
 
 
     public Text altitudeText;
-    public Text velocityXText;
-    public Text velocityYText;
-    public Text accelXText;
-    public Text accelYText;
+    public TMP_Text velocityXText;
+    public TMP_Text velocityYText;
+    public TMP_Text accelXText;
+    public TMP_Text accelYText;
 
+
+    public TMP_Text altitudeTextPro;
 
     public LanderController landerController;
 
@@ -68,10 +71,11 @@ public class GameUI : MonoBehaviour
 
         // UI Texts
         //altitudeText.text = "Alt.: " + System.Math.Round(physicsData.altitude, 1).ToString() + "m";
-        //velocityXText.text = "Velo X: " + System.Math.Round(physicsData.velocity.x, 1).ToString() + "m/s";
-        //velocityYText.text = "Velo Y: " + System.Math.Round(physicsData.velocity.y, 1).ToString() + "m/s";
-        //accelXText.text = "Accel. X: " + System.Math.Round(physicsData.acceleration.x, 1).ToString() + "m/s/s";
-        //accelYText.text = "Accel. Y: " + System.Math.Round(physicsData.acceleration.y, 1).ToString() + "m/s/s";
+        velocityXText.text = System.Math.Round(physicsData.velocity.x, 1).ToString() + "m/s";
+        velocityYText.text = System.Math.Round(physicsData.velocity.y, 1).ToString() + "m/s";
+        accelXText.text = System.Math.Round(physicsData.acceleration.x, 1).ToString() + "m/s/s";
+        accelYText.text = System.Math.Round(physicsData.acceleration.y, 1).ToString() + "m/s/s";
+        altitudeTextPro.text = System.Math.Round(physicsData.altitude, 1).ToString() + "m";
 
         // Fillable bars
         thrust.fillAmount = landerController.throttle;
