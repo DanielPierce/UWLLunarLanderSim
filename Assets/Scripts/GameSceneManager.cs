@@ -16,6 +16,7 @@ public class GameSceneManager : MonoBehaviour
   public Text softLandingText;
   public Text hardLandingText;
   public Image pausePopup;
+  public Image helpPopup;
   public Image offScreenPopup;
   public enum Scenario { Moon, Mars };
   public enum SimulationMode { Arcade, FullPhys }
@@ -27,12 +28,12 @@ public class GameSceneManager : MonoBehaviour
 
 
   private bool isPaused = false;
+  private bool isHelp = false;
 
   void Start()
   {
 
-    changePause();
-    changePause();
+    changeHelp();
 
     softLandingPopup.enabled = false;
     hardLandingPopup.enabled = false;
@@ -41,6 +42,7 @@ public class GameSceneManager : MonoBehaviour
     softLandingText.enabled = false;
     hardLandingText.enabled = false;
     pausePopup.enabled = false;
+    offScreenPopup.enabled = false;
 
     lander.body.gravityScale = 0;
     if (currentLocation == Scenario.Moon)
@@ -75,6 +77,10 @@ public class GameSceneManager : MonoBehaviour
     landerData = lander.GetPhysicsData();
     HandleLanderThrottle();
     // If the space key was pressed this frame
+    if (Input.GetKeyDown(KeyCode.H))
+    {
+      changeHelp();
+    }
     if (Input.GetKeyDown(KeyCode.P))
     {
       changePause();
@@ -88,6 +94,7 @@ public class GameSceneManager : MonoBehaviour
       lander.ResetLander();
       crashLandingPopup.enabled = false;
       crashLandingText.enabled = false;
+      offScreenPopup.enabled = false;
     }
   }
 
@@ -105,7 +112,7 @@ public class GameSceneManager : MonoBehaviour
     }
     else
     {
-      Time.timeScale = 1;
+      Time.timeScale = .8f;
       softLandingPopup.enabled = false;
       hardLandingPopup.enabled = false;
       crashLandingPopup.enabled = false;
@@ -113,6 +120,19 @@ public class GameSceneManager : MonoBehaviour
       softLandingText.enabled = false;
       hardLandingText.enabled = false;
       pausePopup.enabled = false;
+      helpPopup.enabled = false;
+      offScreenPopup.enabled = false;
+    }
+  }
+
+  public void changeHelp() {
+    isHelp = !isHelp;
+    if (isHelp) {
+      helpPopup.enabled = true;
+      Time.timeScale = 0;
+    } else {
+      helpPopup.enabled = false;
+      Time.timeScale = .8f;
     }
   }
 
