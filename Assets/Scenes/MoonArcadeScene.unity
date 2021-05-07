@@ -5752,7 +5752,7 @@ GameObject:
   - component: {fileID: 1905702168}
   - component: {fileID: 1905702167}
   m_Layer: 5
-  m_Name: ThrustLabel
+  m_Name: ThrottleValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5774,8 +5774,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 320, y: 60}
-  m_SizeDelta: {x: 20, y: 20}
+  m_AnchoredPosition: {x: 275, y: 60}
+  m_SizeDelta: {x: 60, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1905702167
 MonoBehaviour:
@@ -5796,7 +5796,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: kN
+  m_text: Number
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6866,7 +6866,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: {fileID: 343344429}
   fuel: {fileID: 1424752389}
-  altitude: {fileID: 0}
   attitude: {fileID: 17748377}
   diagonalV: {fileID: 99861003}
   verticalV: {fileID: 1947747077}
@@ -6877,12 +6876,15 @@ MonoBehaviour:
   velMax: 60
   accelMax: 25
   maxOut: 25
-  altitudeText: {fileID: 0}
   velocityXText: {fileID: 1745166146}
   velocityYText: {fileID: 480132030}
   accelXText: {fileID: 719607449}
   accelYText: {fileID: 117941937}
-  altitudeTextPro: {fileID: 1716143836}
+  altitudeText: {fileID: 1716143836}
+  contactText: {fileID: 2135443550}
+  engineStatusText: {fileID: 457505396}
+  throttleText: {fileID: 1905702167}
+  fuelText: {fileID: 2139866575}
   landerController: {fileID: 733349037}
   vectorScale: 15
   maxVelo: 8
@@ -7125,7 +7127,7 @@ GameObject:
   - component: {fileID: 2139866576}
   - component: {fileID: 2139866575}
   m_Layer: 5
-  m_Name: FuelLabel
+  m_Name: FuelValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7147,8 +7149,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 320, y: 20}
-  m_SizeDelta: {x: 20, y: 20}
+  m_AnchoredPosition: {x: 275, y: 20}
+  m_SizeDelta: {x: 60, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2139866575
 MonoBehaviour:
@@ -7169,7 +7171,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: kg
+  m_text: Number
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -8,9 +8,7 @@ public class GameUI : MonoBehaviour
 {
     public Image thrust;
     public Image fuel;
-    public Image altitude;
     public Image attitude;
-
 
     public DisplayVector diagonalV;
     public DisplayVector verticalV;
@@ -25,14 +23,17 @@ public class GameUI : MonoBehaviour
     public float maxOut = 100;
 
 
-    public Text altitudeText;
     public TMP_Text velocityXText;
     public TMP_Text velocityYText;
     public TMP_Text accelXText;
     public TMP_Text accelYText;
 
+    public TMP_Text altitudeText;
+    public TMP_Text contactText;
+    public TMP_Text engineStatusText;
 
-    public TMP_Text altitudeTextPro;
+    public TMP_Text throttleText;
+    public TMP_Text fuelText;
 
     public LanderController landerController;
 
@@ -70,12 +71,17 @@ public class GameUI : MonoBehaviour
         physicsData = landerController.GetPhysicsData();
 
         // UI Texts
-        //altitudeText.text = "Alt.: " + System.Math.Round(physicsData.altitude, 1).ToString() + "m";
         velocityXText.text = System.Math.Round(physicsData.velocity.x, 1).ToString() + "m/s";
         velocityYText.text = System.Math.Round(physicsData.velocity.y, 1).ToString() + "m/s";
         accelXText.text = System.Math.Round(physicsData.acceleration.x, 1).ToString() + "m/s/s";
         accelYText.text = System.Math.Round(physicsData.acceleration.y, 1).ToString() + "m/s/s";
-        altitudeTextPro.text = System.Math.Round(physicsData.altitude, 1).ToString() + "m";
+
+        altitudeText.text = System.Math.Round(physicsData.altitude, 1).ToString() + "m";
+        contactText.text = landerController.IsLanded() ? "Contact" : "In Flight";
+        engineStatusText.text = landerController.thrusterEnabled ? "On" : "Off";
+
+        throttleText.text = System.Math.Round(landerController.throttle * (float)landerController.thrust).ToString() + "N";
+        fuelText.text = System.Math.Round(landerController.currentFuelMass, 1).ToString() + "kg";
 
         // Fillable bars
         thrust.fillAmount = landerController.throttle;
@@ -87,8 +93,6 @@ public class GameUI : MonoBehaviour
 
         // Over max fuel mass in end, temporary number
         fuel.fillAmount = landerController.currentFuelMass / 816;
-
-        //altitude.fillAmount = physicsData.altitude / 100;
 
 
         // Attitude Indicator
