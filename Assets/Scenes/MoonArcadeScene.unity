@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 16487849}
   - component: {fileID: 16487848}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: HelpMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16487846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1468497541}
@@ -1530,7 +1530,7 @@ RectTransform:
   - {fileID: 1207823480}
   - {fileID: 736888173}
   m_Father: {fileID: 1938153063}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2124,7 +2124,7 @@ RectTransform:
   - {fileID: 1905702166}
   - {fileID: 2139866574}
   m_Father: {fileID: 1938153063}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3178,7 +3178,7 @@ RectTransform:
   - {fileID: 17748376}
   - {fileID: 1462677687}
   m_Father: {fileID: 1938153063}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3868,7 +3868,7 @@ RectTransform:
   - {fileID: 2135443549}
   - {fileID: 457505395}
   m_Father: {fileID: 1938153063}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -4699,11 +4699,11 @@ RectTransform:
   - {fileID: 1362080771}
   - {fileID: 16487847}
   m_Father: {fileID: 1938153063}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000009056, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1503884200
@@ -6038,12 +6038,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1468497541}
   - {fileID: 943216838}
   - {fileID: 569269925}
   - {fileID: 2065317989}
   - {fileID: 425656762}
   - {fileID: 1219446733}
+  - {fileID: 1468497541}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6796,7 +6796,7 @@ RectTransform:
   - {fileID: 130866680}
   - {fileID: 1321691887}
   m_Father: {fileID: 1938153063}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -6910,7 +6910,7 @@ MonoBehaviour:
   softLandingText: {fileID: 1939180169}
   hardLandingText: {fileID: 1503884202}
   pausePopup: {fileID: 148098615}
-  helpPopup: {fileID: 0}
+  helpPopup: {fileID: 16487848}
   offScreenPopup: {fileID: 1362080772}
   currentLocation: 0
   simMode: 0
