@@ -17,17 +17,17 @@ public class ArcadeLanderController : LanderController
         if(IsLanded())
         {
             internalRotation = -1 * (body.rotation - 90);
-            sprite.transform.rotation = Quaternion.AngleAxis(body.rotation, Vector3.forward);
         }
         else
         {
             internalRotation = Mathf.Round((-1 * (body.rotation - 90)) / degreeIncrement) * degreeIncrement;
-            sprite.transform.rotation = Quaternion.AngleAxis(Mathf.Round(body.rotation / degreeIncrement) * degreeIncrement, Vector3.forward);
+            ///sprite.transform.rotation = Quaternion.AngleAxis(Mathf.Round(body.rotation / degreeIncrement) * degreeIncrement, Vector3.forward);
             body.angularVelocity = 0;
         }
 
         record.internalRotation = internalRotation;
         sprite.transform.position = this.transform.position;
+        sprite.transform.rotation = Quaternion.AngleAxis(body.rotation, Vector3.forward);
     }
 
     public override void RotateLeft()
