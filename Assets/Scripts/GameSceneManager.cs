@@ -67,7 +67,7 @@ public class GameSceneManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            changePause();
+            changePause(true);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -81,11 +81,11 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
-    public void changePause()
+    public void changePause(bool setPopup = false)
     {
         // Pause of unpause
         isPaused = !isPaused;
-        if (!lander.IsLanded())
+        if(setPopup)
         {
             popups.pausePopup.DisplayPopup();
         }
