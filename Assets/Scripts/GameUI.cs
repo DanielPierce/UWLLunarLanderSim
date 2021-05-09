@@ -98,10 +98,6 @@ public class GameUI : MonoBehaviour
         // Attitude Indicator
         attitude.transform.rotation = Quaternion.Euler(0, 0, -1 * physicsData.degreesRotated + 90);
 
-
-
-
-        // Scalable vectors
         diagonalV.displayVector = physicsData.velocity;
         horizontalV.displayVector = physicsData.velocity * Vector2.right;
         verticalV.displayVector = physicsData.velocity * Vector2.up;
@@ -109,5 +105,17 @@ public class GameUI : MonoBehaviour
         diagonalA.displayVector = physicsData.acceleration;
         horizontalA.displayVector = physicsData.acceleration * Vector2.right;
         verticalA.displayVector = physicsData.acceleration * Vector2.up;
+
+        // Scalable vectors
+        if (landerController.IsLanded())
+        {
+            diagonalV.displayVector = Vector2.zero;
+            horizontalV.displayVector = Vector2.zero;
+            verticalV.displayVector = Vector2.zero;
+
+            diagonalA.displayVector = Vector2.zero;
+            horizontalA.displayVector = Vector2.zero;
+            verticalA.displayVector = Vector2.zero;
+        }
     }
 }

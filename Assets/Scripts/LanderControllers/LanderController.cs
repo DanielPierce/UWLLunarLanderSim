@@ -241,7 +241,6 @@ public class LanderController : MonoBehaviour
             throttle = 0;
             currentFuelMass = 0;
             gameSceneManager.popups.OnCrashLanding(velocity);
-            Debug.Log("hit crash terrain");
         }
 
         thrusterEnabled = false;
