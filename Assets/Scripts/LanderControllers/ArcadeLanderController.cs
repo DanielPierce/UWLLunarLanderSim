@@ -14,16 +14,8 @@ public class ArcadeLanderController : LanderController
     }
     public override void OnPhysicsUpdate()
     {
-        if(IsLanded())
-        {
-            internalRotation = -1 * (body.rotation - 90);
-        }
-        else
-        {
-            internalRotation = Mathf.Round((-1 * (body.rotation - 90)) / degreeIncrement) * degreeIncrement;
-            ///sprite.transform.rotation = Quaternion.AngleAxis(Mathf.Round(body.rotation / degreeIncrement) * degreeIncrement, Vector3.forward);
-            body.angularVelocity = 0;
-        }
+        internalRotation = Mathf.Round((-1 * (body.rotation - 90)) / degreeIncrement) * degreeIncrement;
+        ApplyCounterTorque();
 
         record.internalRotation = internalRotation;
         sprite.transform.position = this.transform.position;

@@ -131,6 +131,11 @@ public class LanderController : MonoBehaviour
         sprite.transform.rotation = transform.rotation;
         sprite.transform.position = transform.position;
 
+        ApplyCounterTorque();
+    }
+
+    protected void ApplyCounterTorque()
+    {
         if (body.angularVelocity != 0 && !isRotationApplied)
         {
             if (body.angularVelocity > 0.0001)
