@@ -92,12 +92,16 @@ public class GameSceneManager : MonoBehaviour
         if (isPaused)
         {
             Time.timeScale = 0;
+            Debug.Log("pause");
         }
         else
         {
-            Time.timeScale = .8f;
-            popups.HideAll();
-            Debug.Log("change pause");
+            if(!isHelp)
+            {
+                Time.timeScale = .8f;
+            }
+            popups.pausePopup.HidePopup();
+            Debug.Log("unpause");
         }
     }
 
@@ -112,7 +116,10 @@ public class GameSceneManager : MonoBehaviour
         else
         {
             popups.helpPopup.HidePopup();
-            Time.timeScale = .8f;
+            if(!isPaused)
+            {
+                Time.timeScale = 0.8f;
+            }
         }
     }
 

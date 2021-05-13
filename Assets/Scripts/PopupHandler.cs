@@ -14,19 +14,21 @@ public class PopupHandler : MonoBehaviour
 
     public void OnResetPressed()
     {
-        crashPopup.HidePopup();
-        offScreenPopup.HidePopup();
+        HideAll();
     }
     public void OnSoftLanding(float velocity)
     {
+        HideAll();
         softLandingPopup.DisplayPopup("Soft landing at " + velocity + " m/s");
     }
     public void OnHardLanding(float velocity)
     {
+        HideAll();
         hardLandingPopup.DisplayPopup("Hard landing at " + velocity + " m/s");
     }
     public void OnCrashLanding(float velocity)
     {
+        HideAll();
         crashPopup.DisplayPopup("Crash landing at " + velocity + " m/s");
         Debug.Log("on crash landing");
     }
