@@ -99,6 +99,7 @@ public class GameSceneManager : MonoBehaviour
             if(!isHelp)
             {
                 Time.timeScale = .8f;
+                popups.HideAll();
             }
             popups.pausePopup.HidePopup();
             Debug.Log("unpause");

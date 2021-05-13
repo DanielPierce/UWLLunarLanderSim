@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Popup : MonoBehaviour
 {
-    public Image display;
+    public GameObject display;
 
     // Start is called before the first frame update
     void Start()
@@ -21,11 +21,11 @@ public class Popup : MonoBehaviour
 
     public virtual void DisplayPopup()
     {
-        display.enabled = true;
+        display.SetActive(true);
     }
 
     public virtual void HidePopup()
     {
-        display.enabled = false;
+        display.SetActive(false);
     }
 }
