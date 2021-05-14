@@ -67,7 +67,7 @@ public class GameSceneManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            changePause();
+            changePause(true);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -81,23 +81,28 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
-    public void changePause()
+    public void changePause(bool setPopup = false)
     {
         // Pause of unpause
         isPaused = !isPaused;
-        if (!lander.IsLanded())
+        if(setPopup)
         {
             popups.pausePopup.DisplayPopup();
         }
         if (isPaused)
         {
             Time.timeScale = 0;
+            Debug.Log("pause");
         }
         else
         {
-            Time.timeScale = .8f;
-            popups.HideAll();
-            Debug.Log("change pause");
+            if(!isHelp)
+            {
+                Time.timeScale = .8f;
+                popups.HideAll();
+            }
+            popups.pausePopup.HidePopup();
+            Debug.Log("unpause");
         }
     }
 
@@ -112,7 +117,10 @@ public class GameSceneManager : MonoBehaviour
         else
         {
             popups.helpPopup.HidePopup();
-            Time.timeScale = .8f;
+            if(!isPaused)
+            {
+                Time.timeScale = 0.8f;
+            }
         }
     }
 

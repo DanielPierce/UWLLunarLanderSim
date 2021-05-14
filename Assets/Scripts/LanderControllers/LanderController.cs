@@ -56,6 +56,8 @@ public class LanderController : MonoBehaviour
     public UnityEvent CamZone3Event;
     public UnityEvent LeaveCamZoneEvent;
 
+    private bool hasCrashed = false;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -131,6 +133,11 @@ public class LanderController : MonoBehaviour
         sprite.transform.rotation = transform.rotation;
         sprite.transform.position = transform.position;
 
+        ApplyCounterTorque();
+    }
+
+    protected void ApplyCounterTorque()
+    {
         if (body.angularVelocity != 0 && !isRotationApplied)
         {
             if (body.angularVelocity > 0.0001)
@@ -155,7 +162,7 @@ public class LanderController : MonoBehaviour
     {
         mostRecentCollision = targetObj.collider;
 
-        if (targetObj.gameObject.tag == "FlatTerrain")
+        if (targetObj.gameObject.tag == "FlatTerrain" && !hasCrashed)
         {
             float velocity = targetObj.relativeVelocity.magnitude;
             float landingAngle = Mathf.Abs(body.rotation) % 360;
@@ -185,7 +192,6 @@ public class LanderController : MonoBehaviour
                     currentFuelMass = currentFuelMass * 0.8f;
 
                     //Toggle off thrusters
-
                     gameSceneManager.changePause();
                 }
                 else if (velocity <= safeLandingMaxSpeed && ((landingAngle >= 0 && landingAngle <= 45) || (landingAngle >= 315 && landingAngle <= 360)))
@@ -199,7 +205,6 @@ public class LanderController : MonoBehaviour
                     currentFuelMass = currentFuelMass * 0.8f;
 
                     //Toggle off thrusters
-
                     gameSceneManager.changePause();
                 }
                 else if (velocity <= hardLandingMaxSpeed && ((landingAngle >= 0 && landingAngle <= 45) || (landingAngle >= 315 && landingAngle <= 360)))
@@ -226,17 +231,17 @@ public class LanderController : MonoBehaviour
                     //Drain remaining fuel (for now) to remove lander's ability to fly
                     throttle = 0;
                     currentFuelMass = 0;
+                    hasCrashed = true;
                 }
             }
         }
 
-        if (targetObj.gameObject.tag == "CrashTerrain")
+        if (targetObj.gameObject.tag == "CrashTerrain" && !hasCrashed)
         {
             float velocity = targetObj.relativeVelocity.magnitude;
             throttle = 0;
             currentFuelMass = 0;
             gameSceneManager.popups.OnCrashLanding(velocity);
-            Debug.Log("hit crash terrain");
         }
 
         thrusterEnabled = false;
@@ -297,7 +302,7 @@ public class LanderController : MonoBehaviour
         record.netTorque = 0;
         record.velocity = body.velocity;
         record.angularVelocity = body.angularVelocity * Mathf.Rad2Deg;
-        record.altitude = body.position.y - (body.transform.localScale.y / 2);
+        record.altitude = body.position.y - (body.transform.localScale.y / 2) - 7.8f;
 
 
         // Calculate the number of degrees from vertical the sprite has rotated
@@ -370,6 +375,7 @@ public class LanderController : MonoBehaviour
         body.velocity = Vector2.zero;
         body.angularVelocity = 0;
         currentFuelMass = setFuelLevel;
+        hasCrashed = false;
     }
 }
 
