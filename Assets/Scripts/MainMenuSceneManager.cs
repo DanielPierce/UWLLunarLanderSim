@@ -17,5 +17,6 @@ public class MainMenuSceneManager : MonoBehaviour
         } else {
             creditsPopup.enabled = false;
         }
+        
     }
 }
