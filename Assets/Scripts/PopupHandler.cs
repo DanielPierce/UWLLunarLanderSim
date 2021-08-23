@@ -32,7 +32,7 @@ public class PopupHandler : MonoBehaviour
     {
         HideAll();
         string velocityAsString = string.Format("{0:0.###}", velocity);
-        crashPopup.DisplayPopup("<b>Crash!</b>\nTouchdown at " + velocityAsString + " m/s\nPress 'P' to continue!");
+        crashPopup.DisplayPopup("<b>Crash!</b>\nTouchdown at " + velocityAsString + " m/s\nPress 'R' to restart!");
         Debug.Log("on crash landing");
     }
 
