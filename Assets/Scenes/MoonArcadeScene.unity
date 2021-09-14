@@ -3463,7 +3463,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<b>Paused</b>
 
-    
+
 
     Press P to resume'
   m_isRightToLeft: 0
@@ -4915,7 +4915,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<b>Out of Bounds!<b>
 
-    
+
 
     Press R to restart'
   m_isRightToLeft: 0
@@ -5632,8 +5632,8 @@ MonoBehaviour:
 
     R - Reset
 
-    H - Show/Hide
-    Help Menu
+    H - Show/Hide Help
+    Menu
 
     <u>Goal</u>
 
@@ -5645,7 +5645,6 @@ MonoBehaviour:
     the craggy ground in between landing zones. If you crash, press R to reset your
     lander. Have fun!
 
-    
 
     <b>Press H to continue</b>'
   m_isRightToLeft: 0
