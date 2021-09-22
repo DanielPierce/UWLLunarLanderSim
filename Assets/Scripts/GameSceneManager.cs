@@ -77,12 +77,16 @@ public class GameSceneManager : MonoBehaviour
         {
             lander.ResetLander();
             popups.OnResetPressed();
+            isPaused = false;
+            isHelp = false;
+            Time.timeScale = .8f;
             Debug.Log("press r");
         }
     }
 
     public void changePause(bool setPopup = false)
     {
+        if (isHelp) return;
         // Pause of unpause
         isPaused = !isPaused;
         if(setPopup)
@@ -108,6 +112,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void changeHelp()
     {
+        if (isPaused) return;
         isHelp = !isHelp;
         if (isHelp)
         {
