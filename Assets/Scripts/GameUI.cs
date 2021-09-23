@@ -35,6 +35,8 @@ public class GameUI : MonoBehaviour
     public TMP_Text throttleText;
     public TMP_Text fuelText;
 
+    public TMP_FontAsset font;
+
     public LanderController landerController;
 
     private PhysicsData physicsData;
@@ -62,6 +64,16 @@ public class GameUI : MonoBehaviour
         diagonalA.MaxOut = maxOut;
         verticalA.MaxOut = maxOut;
         horizontalA.MaxOut = maxOut;
+
+        velocityXText.font = font;
+        velocityYText.font = font;
+        accelXText.font = font;
+        accelYText.font = font;
+
+        velocityXText.fontSize = 18;
+        velocityYText.fontSize = 18;
+        accelXText.fontSize = 18;
+        accelYText.fontSize = 18;
     }
 
     // Update is called once per frame

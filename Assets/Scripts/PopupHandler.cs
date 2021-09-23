@@ -19,17 +19,20 @@ public class PopupHandler : MonoBehaviour
     public void OnSoftLanding(float velocity)
     {
         HideAll();
-        softLandingPopup.DisplayPopup("Soft landing at " + velocity + " m/s");
+        string velocityAsString = string.Format("{0:0.###}", velocity);
+        softLandingPopup.DisplayPopup(string.Format("<b>Soft Landing!</b>\nTouchdown at " + velocityAsString + " m/s\nPress 'P' to continue!"));
     }
     public void OnHardLanding(float velocity)
     {
         HideAll();
-        hardLandingPopup.DisplayPopup("Hard landing at " + velocity + " m/s");
+        string velocityAsString = string.Format("{0:0.###}", velocity);
+        hardLandingPopup.DisplayPopup("<b>Hard Landing!</b>\nTouchdown at " + velocityAsString + " m/s\nPress 'P' to continue!");
     }
     public void OnCrashLanding(float velocity)
     {
         HideAll();
-        crashPopup.DisplayPopup("Crash landing at " + velocity + " m/s");
+        string velocityAsString = string.Format("{0:0.###}", velocity);
+        crashPopup.DisplayPopup("<b>Crash!</b>\nTouchdown at " + velocityAsString + " m/s\nPress 'R' to restart!");
         Debug.Log("on crash landing");
     }
 

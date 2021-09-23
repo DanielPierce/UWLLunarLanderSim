@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class MainMenuSceneManager : MonoBehaviour
 {
-    public Image creditsPopup;
+    public GameObject creditsPopup;
 
     private bool isCredits = false;
+
+    public void Start()
+    {
+        creditsPopup.SetActive(isCredits);
+    }
     
     public void changeCredits() {
         isCredits = !isCredits;
-
-        if (isCredits) {
-            creditsPopup.enabled = true;
-        } else {
-            creditsPopup.enabled = false;
-        }
+        creditsPopup.SetActive(isCredits);
     }
 }
