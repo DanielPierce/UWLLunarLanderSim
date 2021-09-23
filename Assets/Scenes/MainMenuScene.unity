@@ -231,7 +231,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 225, y: 25}
-  m_SizeDelta: {x: 200, y: 350}
+  m_SizeDelta: {x: 300, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &49537319
 MonoBehaviour:
@@ -306,7 +306,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 175}
+  m_SizeDelta: {x: 140, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &127810145
 MonoBehaviour:
@@ -327,8 +327,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "UWL Lunar Lander Simulation\r\n<u>Created By\r</u>\nGeoffery Crawford\r\nLogan
-    Larson\r\nDanny Pierce\r\n<u>Supervized by</u>\nDr. Shauna Sallmen\n"
+  m_text: "UWL Lunar Lander Simulation\r\n\n<u>Created By\r</u>\nGeoffery Crawford\r\nLogan
+    Larson\r\nDanny Pierce\r\n\n<u>Supervized by</u>\nDr. Shauna Sallmen\n\nDistributed
+    under the MIT License, code available at https://github.com/DanielPierce/\nUWLLunarLanderSim"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 030e592bd378096469d98fec28d7a2fd, type: 2}
   m_sharedMaterial: {fileID: 2451490187177541541, guid: 030e592bd378096469d98fec28d7a2fd,
