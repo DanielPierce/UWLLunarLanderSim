@@ -32,7 +32,7 @@ public class LanderController : MonoBehaviour
 
     public bool thrusterEnabled = true;
 
-    protected const float safeLandingMaxSpeed = 3.0f;
+    protected const float safeLandingMaxSpeed = 2.0f;
     protected const float hardLandingMaxSpeed = 6.0f;
     protected const float safeLandingAngle = 15.0f;
     protected const float hardLandingAngle = 45.0f;
